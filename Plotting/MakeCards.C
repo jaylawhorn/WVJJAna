@@ -122,38 +122,42 @@ void MakeCards() {
       int index=DYJets.size();
       DYJets.push_back(makeSample(sampname, filename, xsec, xsecCorr, nEvents, nNegEvents));
     }
-    //else if (sampname == "dataM") {
-    //  int index=DataM.size();
-    //  DataM.push_back(makeSample(sampname, filename, xsec, xsecCorr, nEvents, nNegEvents));
-    //}
   }
 
 
   const int nBinsMVBF=3; 
+  //const int nBinsMVBF=1; 
   const int nBinsDETA=3; 
-  const int nBinsMVV=7;
+  //const int nBinsDETA=1; 
+  //const int nBinsMVV=7;
+  const int nBinsMVV=4;
   float MVBF_LE[nBinsMVBF+1] = { 500, 600, 1000, 3000 };
+  //float MVBF_LE[nBinsMVBF+1] = { 600, 1000, 3000 };
+  //float MVBF_LE[nBinsMVBF+1] = { 600, 3000 };
   float DETA_LE[nBinsDETA+1] = { 3.0, 4.0, 5.0, 10.0 };
-  float MVV_LE[nBinsMVV+1] = {150, 300, 450, 600, 1075, 1550, 2025, 2500};
+  //float DETA_LE[nBinsDETA+1] = { 4.0, 5.0, 10.0 };
+  //float DETA_LE[nBinsDETA+1] = { 4.0,10.0 };
+  //float MVV_LE[nBinsMVV+1] = {150, 300, 450, 600, 1075, 1550, 2025, 2500};
+  float MVV_LE[nBinsMVV+1] = {600, 1075, 1550, 2025, 2500};
   
   Binning bins=makeBinning(nBinsMVBF, nBinsDETA, nBinsMVV, 
 			   MVBF_LE, DETA_LE, MVV_LE);
 
-  Draw2(VBF_EWK,bins,"VBF_EWK.root","nom");
-  Draw2(VBF_EWK,bins,"VBF_EWK.root","jesup");
-  Draw2(VBF_EWK,bins,"VBF_EWK.root","jesdn");
-  Draw2(VBF_QCD,bins,"VBF_QCD.root","nom");
-  Draw2(VBF_QCD,bins,"VBF_QCD.root","jesup");
-  Draw2(VBF_QCD,bins,"VBF_QCD.root","jesdn");
-  Draw2(Top,bins,"Top.root","nom");
-  Draw2(Top,bins,"Top.root","jesup");
-  Draw2(Top,bins,"Top.root","jesdn");
-  Draw2(WJets,bins,"WJets.root","nom");
-  Draw2(WJets,bins,"WJets.root","jesup");
-  Draw2(WJets,bins,"WJets.root","jesdn");
-  Draw2(DYJets,bins,"DYJets.root","nom");
-  Draw2(DYJets,bins,"DYJets.root","jesup");
-  Draw2(DYJets,bins,"DYJets.root","jesdn");
+  Draw2(VBF_EWK,bins,"VBF_EWK_1.root","nom");
+  //Draw2(VBF_EWK,bins,"VBF_EWK3.root","jesup");
+  //Draw2(VBF_EWK,bins,"VBF_EWK3.root","jesdn");
+  Draw2(VBF_QCD,bins,"VBF_QCD_1.root","nom");
+  //Draw2(VBF_QCD,bins,"VBF_QCD3.root","jesup");
+  //Draw2(VBF_QCD,bins,"VBF_QCD3.root","jesdn");
+  Draw2(Top,bins,"Top_1.root","nom");
+  //Draw2(Top,bins,"Top3.root","jesup");
+  //Draw2(Top,bins,"Top3.root","jesdn");
+  Draw2(WJets,bins,"WJets_1.root","nom");
+  //Draw2(WJets,bins,"WJets3.root","jesup");
+  //Draw2(WJets,bins,"WJets3.root","jesdn");
+  Draw2(DYJets,bins,"DYJets_1.root","nom");
+  //Draw2(DYJets,bins,"DYJets3.root","jesup");
+  //Draw2(DYJets,bins,"DYJets3.root","jesdn");
 
 
 }
@@ -163,22 +167,35 @@ void Draw2(vector<Sample> samp1, Binning bins, TString outfile, TString var) {
   if (var=="nom") out = new TFile(outfile,"RECREATE");
   else out = new TFile(outfile,"UPDATE");
 
-  TH1D* mWV = new TH1D(histName, histName, bins.nBinsMVBF*bins.nBinsDETA*bins.nBinsMVV, 0, ;
   TString histName;
-  
-  for (int i=0; i<bins.nBinsMVBF; i++) { // careful with i,j order!
-    for (int j=0; j<bins.nBinsDETA; j++) {
-      
-      if (var=="nom") histName = Form("%s_mWV_b%i%i",samp1.at(0).sampname.c_str(),i,j);
-      else histName = Form("%s_mWV_b%i%i_%s",samp1.at(0).sampname.c_str(),i,j, var.Data());
 
-      mWV.push_back(new TH1D(histName,histName,bins.nBinsMVV, bins.MVV_LE));
-      mWV.at(bins.nBinsMVBF*i+j)->Sumw2();
-      mWV.at(bins.nBinsMVBF*i+j)->SetTitle(TString(samp1.at(0).sampname));
-      mWV.at(bins.nBinsMVBF*i+j)->GetXaxis()->SetTitle("M_{mvjj}");
+  if (var=="nom") histName = Form("%s_mWjj",samp1.at(0).sampname.c_str());
+  else if (var=="jesup") histName = Form("%s_mWjj_jesUp",samp1.at(0).sampname.c_str());
+  else if (var=="jesdn") histName = Form("%s_mWjj_jesDown",samp1.at(0).sampname.c_str());
+  TH1D* mWjj = new TH1D(histName, histName, bins.nBinsMVBF*bins.nBinsDETA*bins.nBinsMVV, 0, bins.nBinsMVBF*bins.nBinsDETA*bins.nBinsMVV);
+  mWjj->Sumw2();
+  mWjj->SetTitle(TString(samp1.at(0).sampname));
 
-    }
-  }
+  if (var=="nom") histName = Form("%s_mWV",samp1.at(0).sampname.c_str());
+  else if (var=="jesup") histName = Form("%s_mWV_jesUp",samp1.at(0).sampname.c_str());
+  else if (var=="jesdn") histName = Form("%s_mWV_jesDown",samp1.at(0).sampname.c_str());
+  TH1D* mWV = new TH1D(histName, histName, bins.nBinsMVBF*bins.nBinsDETA*bins.nBinsMVV, 0, bins.nBinsMVBF*bins.nBinsDETA*bins.nBinsMVV);
+  mWV->Sumw2();
+  mWV->SetTitle(TString(samp1.at(0).sampname));
+
+  if (var=="nom") histName = Form("%s_mZjj",samp1.at(0).sampname.c_str());
+  else if (var=="jesup") histName = Form("%s_mZjj_jesUp",samp1.at(0).sampname.c_str());
+  else if (var=="jesdn") histName = Form("%s_mZjj_jesDown",samp1.at(0).sampname.c_str());
+  TH1D* mZjj = new TH1D(histName, histName, bins.nBinsMVBF*bins.nBinsDETA*bins.nBinsMVV, 0, bins.nBinsMVBF*bins.nBinsDETA*bins.nBinsMVV);
+  mZjj->Sumw2();
+  mZjj->SetTitle(TString(samp1.at(0).sampname));
+
+  if (var=="nom") histName = Form("%s_mZV",samp1.at(0).sampname.c_str());
+  else if (var=="jesup") histName = Form("%s_mZV_jesUp",samp1.at(0).sampname.c_str());
+  else if (var=="jesdn") histName = Form("%s_mZV_jesDown",samp1.at(0).sampname.c_str());
+  TH1D* mZV = new TH1D(histName, histName, bins.nBinsMVBF*bins.nBinsDETA*bins.nBinsMVV, 0, bins.nBinsMVBF*bins.nBinsDETA*bins.nBinsMVV);
+  mZV->Sumw2();
+  mZV->SetTitle(TString(samp1.at(0).sampname));
 
   Float_t lumi=35867.06;
 
@@ -272,7 +289,6 @@ void Draw2(vector<Sample> samp1, Binning bins, TString outfile, TString var) {
       intree->SetBranchAddress("mass_llj_PuppiAK8", &mass_llj_PuppiAK8);    
     }
     
-
     intree->SetBranchAddress("vbf_maxpt_j1_eta", &vbf_maxpt_j1_eta);
     intree->SetBranchAddress("vbf_maxpt_j1_phi", &vbf_maxpt_j1_phi);
     intree->SetBranchAddress("vbf_maxpt_j1_e", &vbf_maxpt_j1_e);
@@ -292,7 +308,7 @@ void Draw2(vector<Sample> samp1, Binning bins, TString outfile, TString var) {
     for (int i=0; i<intree->GetEntries(); i++) {
       intree->GetEntry(i);
       
-      if ( !(nBTagJet_loose && isResolved &&
+      if ( !(nBTagJet_loose==0 &&
 	     ((PuppiAK8_jet_mass_so_corr>65) && (PuppiAK8_jet_mass_so_corr<105)) &&
 	     ((vbf_maxpt_j1_pt>30) && (vbf_maxpt_j2_pt>30)) && l_pt1>50) ) continue;
 
@@ -315,7 +331,26 @@ void Draw2(vector<Sample> samp1, Binning bins, TString outfile, TString var) {
 	for (int j=0; j<bins.nBinsDETA; j++) {
 
 	  if (deta > bins.DETA_LE[j] && deta < bins.DETA_LE[j+1]) {
-	    mWV.at(bins.nBinsMVBF*i+j)->Fill(mass_lvj_type0_PuppiAK8, weight);
+
+	    for (int k=0; k<bins.nBinsMVV; k++) {
+
+	      if (mass_lvj_type0_PuppiAK8 > bins.MVV_LE[k] && mass_lvj_type0_PuppiAK8 < bins.MVV_LE[k+1]) {
+
+		float indexVal = k + j*bins.nBinsMVV + i*bins.nBinsDETA*bins.nBinsMVV + 0.5;
+		if (isResolved && !isZ) {
+		  mWjj->Fill(indexVal, weight);
+		}
+		else if (isResolved && isZ) {
+		  mZjj->Fill(indexVal, weight);
+		}
+		else if (!isResolved && !isZ) {
+		  mWV->Fill(indexVal, weight);
+		}
+		else if (!isResolved && isZ) {
+		  mZV->Fill(indexVal, weight);
+		}
+	      }
+	    }
 	  }
 	}
       } 

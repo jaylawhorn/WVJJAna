@@ -1,0 +1,25 @@
+max * number of channels
+jmax * number of background
+kmax * number of nuisance parameters
+shapes * * comb_1.root $PROCESS_$CHANNEL $PROCESS_$CHANNEL_$SYSTEMATIC
+shapes data_obs * comb_1.root data_obs_$CHANNEL
+bin mWV
+Observation -1
+
+bin	      mWV        mWV        mWV        mWV        mWV
+process       VBF_EWK 	  VBF_QCD     Top  	  WJets       DYJets
+process       0		  1	      2    	  3	      4		
+rate 	      -1. 	  -1. 	      -1.  	  -1.         -1. 	
+lumi_13TeV        lnN  1.025       1.025    1.025    1.025    1.025
+CMS_eff_m         lnN  1.01        1.01     1.01     1.01     1.01
+CMS_eff_e         lnN  1.01        1.01     1.01     1.01     1.01
+CMS_eff_b_mistag  lnN  0.98        0.98     0.98     0.98     0.98
+CMS_norm_PU       lnN  1.04        1.04     1.04     1.04     1.04
+CMS_norm_met      lnN  1.02        1.02     1.02     1.02     1.02
+norm_EWK          lnN  1.22        -        -        -	      -
+norm_VVQCD        lnN  -           1.35     -        -	      -
+norm_top          lnN  -           -        1.10     -	      -
+norm_Vjets        lnN  -           -        -        1.10     -
+norm_Vjets        lnN  -           -        -        -	      1.10
+#jes shape    	       1.0           1.0        1.0        1.0        1.0
+
