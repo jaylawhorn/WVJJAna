@@ -92,7 +92,7 @@ void DoDrawing() {
   vector<Sample> DYJets;
 
   ifstream ifs;
-  ifs.open("files2017.txt");
+  ifs.open("files.txt");
   assert(ifs.is_open());
   string line;
 
@@ -146,13 +146,13 @@ void DoDrawing() {
   Binning bins=makeBinning(nBinsMVBF, nBinsDETA, nBinsMVV, 
 			   MVBF_LE, DETA_LE, MVV_LE);
 
-  Draw2(VBF_EWK,bins,"VBF_EWK_2017loose_drawE.root","nom");
-  Draw2(VBF_QCD,bins,"VBF_QCD_2017loose_drawE.root","nom");
-  Draw2(Top,bins,"Top_2017loose_drawE.root","nom");
-  Draw2(WJets,bins,"WJets_2017loose_drawE.root","nom");
-  Draw2(DYJets,bins,"DYJets_2017loose_drawE.root","nom");
-  //Draw2(DataM,bins,"DataM_2017loose_drawM.root","nom");
-  Draw2(DataE,bins,"DataE_loose_drawE.root","nom");
+  Draw2(VBF_EWK,bins,"VBF_EWK_2016loose_drawE.root","nom");
+  Draw2(VBF_QCD,bins,"VBF_QCD_2016loose_drawE.root","nom");
+  Draw2(Top,bins,"Top_2016loose_drawE.root","nom");
+  Draw2(WJets,bins,"WJets_2016loose_drawE.root","nom");
+  Draw2(DYJets,bins,"DYJets_2016loose_drawE.root","nom");
+  //Draw2(DataM,bins,"DataM_2016loose_drawM.root","nom");
+  Draw2(DataE,bins,"DataE_2016loose_drawE.root","nom");
 
 
 }
@@ -303,8 +303,8 @@ void Draw2(vector<Sample> samp1, Binning bins, TString outfile, TString var) {
   mVL_ZV->SetTitle(TString(samp1.at(0).sampname));
   mVL_ZV->GetXaxis()->SetTitle("m(Z) lep, ZV");
 
-  //Float_t lumi=35867.06;
-  Float_t lumi=41530.0;
+  Float_t lumi=35867.06;
+  //Float_t lumi=41530.0;
 
   Bool_t  isResolved;
   Int_t   type;
@@ -422,9 +422,9 @@ void Draw2(vector<Sample> samp1, Binning bins, TString outfile, TString var) {
 	     ((vbf_maxpt_j1_pt>30) && (vbf_maxpt_j2_pt>30))) ) continue;
 
       //if ( !(l_pt1>35 && (((type==0)&&(abs(l_eta1)<2.4)) || ((type==1)&&((abs(l_eta1)<2.5)&&!(abs(l_eta1)>1.4442 && abs(l_eta1)<1.566))))) ) continue;
-      if ( !(l_pt1>35 && ((type==1)&&((abs(l_eta1)<2.5)&&!(abs(l_eta1)>1.4442 && abs(l_eta1)<1.566))))) continue;
+      if ( !(l_pt1>30 && ((type==1)&&((abs(l_eta1)<2.5)&&!(abs(l_eta1)>1.4442 && abs(l_eta1)<1.566))))) continue;
 
-      //if ( !(l_pt1>35 && (((type==0)&&(abs(l_eta1)<2.4)) ))) continue;
+      //if ( !(l_pt1>30 && (((type==0)&&(abs(l_eta1)<2.4)) ))) continue;
 
       bool isZ=false;
 
