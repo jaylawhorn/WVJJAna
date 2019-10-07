@@ -18,12 +18,12 @@
 
 void MakePlots() {
 
-  TFile *fVBFEWK = new TFile("VBF_EWK_2017loose_drawM.root","READ");
-  TFile *fVBFQCD = new TFile("VBF_QCD_2017loose_drawM.root","READ");
-  TFile *fTop    = new TFile("Top_2017loose_drawM.root",    "READ");
-  TFile *fWJets  = new TFile("WJets_2017loose_drawM.root",  "READ");
-  TFile *fDYJets = new TFile("DYJets_2017loose_drawM.root", "READ");
-  TFile *fDataM  = new TFile("DataM_2017loose_drawM.root",  "READ");
+  TFile *fVBFEWK = new TFile("VBF_EWK_2016loose_drawM.root","READ");
+  TFile *fVBFQCD = new TFile("VBF_QCD_2016loose_drawM.root","READ");
+  TFile *fTop    = new TFile("Top_2016loose_drawM.root",    "READ");
+  TFile *fWJets  = new TFile("WJets_2016loose_drawM.root",  "READ");
+  TFile *fDYJets = new TFile("DYJets_2016loose_drawM.root", "READ");
+  TFile *fDataM  = new TFile("DataM_2016loose_drawM.root",  "READ");
 
   TCanvas *c1 = new TCanvas("c1","c1",800,600);
   gStyle->SetOptStat(0);

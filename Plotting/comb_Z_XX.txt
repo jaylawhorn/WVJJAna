@@ -1,0 +1,27 @@
+Combination of mZjj=zjj_XX.txt  mZV=zv_XX.txt
+imax 2 number of bins
+jmax 3 number of processes minus 1
+kmax 9 number of nuisance parameters
+----------------------------------------------------------------------------------------------------------------------------------
+shapes *         mZV       comb_XX.root $PROCESS_mZV $PROCESS_mZV_$SYSTEMATIC
+shapes data_obs  mZV       comb_XX.root data_obs_mZV
+shapes *         mZjj      comb_XX.root $PROCESS_mZjj $PROCESS_mZjj_$SYSTEMATIC
+shapes data_obs  mZjj      comb_XX.root data_obs_mZjj
+----------------------------------------------------------------------------------------------------------------------------------
+bin          mZjj   mZV  
+observation  -1     -1   
+----------------------------------------------------------------------------------------------------------------------------------
+bin                                 mZjj     mZjj     mZjj     mZjj     mZV      mZV      mZV      mZV    
+process                             VBF_EWK  VBF_QCD  Top      DYJets   VBF_EWK  VBF_QCD  Top      DYJets 
+process                             0        1        2        3        0        1        2        3      
+rate                                -1       -1       -1       -1       -1       -1       -1       -1     
+----------------------------------------------------------------------------------------------------------------------------------
+CMS_eff_b_mistag        lnN         0.98     0.98     0.98     0.98     0.98     0.98     0.98     0.98   
+CMS_eff_e               lnN         1.02     1.02     1.02     1.02     1.02     1.02     1.02     1.02   
+CMS_eff_m               lnN         1.02     1.02     1.02     1.02     1.02     1.02     1.02     1.02   
+CMS_norm_PU             lnN         1.04     1.04     1.04     1.04     1.04     1.04     1.04     1.04   
+lumi_13TeV              lnN         1.025    1.025    1.025    1.025    1.025    1.025    1.025    1.025  
+norm_EWK                lnN         1.22     -        -        -        1.22     -        -        -      
+norm_VVQCD              lnN         -        1.35     -        -        -        1.35     -        -      
+norm_Vjets              lnN         -        -        -        1.1      -        -        -        1.1    
+norm_top                lnN         -        -        1.1      -        -        -        1.1      -      

@@ -84,6 +84,7 @@ void MakeCards() {
   bool   doStack;
 
   vector<Sample> DataM;
+  vector<Sample> DataE;
   vector<Sample> VBF_EWK;
   vector<Sample> VBF_QCD;
   vector<Sample> Top;
@@ -122,42 +123,46 @@ void MakeCards() {
       int index=DYJets.size();
       DYJets.push_back(makeSample(sampname, filename, xsec, xsecCorr, nEvents, nNegEvents));
     }
+    else if (sampname == "dataE") {
+      int index=DataE.size();
+      DataE.push_back(makeSample(sampname, filename, xsec, xsecCorr, nEvents, nNegEvents));
+    }
+    else if (sampname == "dataM") {
+      int index=DataM.size();
+      DataM.push_back(makeSample(sampname, filename, xsec, xsecCorr, nEvents, nNegEvents));
+    }
   }
 
 
   const int nBinsMVBF=3; 
-  //const int nBinsMVBF=1; 
   const int nBinsDETA=3; 
-  //const int nBinsDETA=1; 
-  //const int nBinsMVV=7;
-  const int nBinsMVV=4;
-  float MVBF_LE[nBinsMVBF+1] = { 500, 600, 1000, 3000 };
-  //float MVBF_LE[nBinsMVBF+1] = { 600, 1000, 3000 };
-  //float MVBF_LE[nBinsMVBF+1] = { 600, 3000 };
-  float DETA_LE[nBinsDETA+1] = { 3.0, 4.0, 5.0, 10.0 };
-  //float DETA_LE[nBinsDETA+1] = { 4.0, 5.0, 10.0 };
-  //float DETA_LE[nBinsDETA+1] = { 4.0,10.0 };
-  //float MVV_LE[nBinsMVV+1] = {150, 300, 450, 600, 1075, 1550, 2025, 2500};
-  float MVV_LE[nBinsMVV+1] = {600, 1075, 1550, 2025, 2500};
+  const int nBinsMVV=7;
+  //float MVBF_LE[nBinsMVBF+1] = { 500, 600, 800, 1000, 3000 };
+  float MVBF_LE[nBinsMVBF+1] = { 600, 800, 1200, 3000 };
+  // float DETA_LE[nBinsDETA+1] = { 3.0, 4.0, 5.0, 6.0, 10.0 };
+  float DETA_LE[nBinsDETA+1] = { 4.0, 5.0, 6.0, 10.0 };
+  float MVV_LE[nBinsMVV+1] = {150, 300, 450, 600, 1075, 1550, 2025, 2500};
   
   Binning bins=makeBinning(nBinsMVBF, nBinsDETA, nBinsMVV, 
 			   MVBF_LE, DETA_LE, MVV_LE);
 
-  Draw2(VBF_EWK,bins,"VBF_EWK_1.root","nom");
-  //Draw2(VBF_EWK,bins,"VBF_EWK3.root","jesup");
-  //Draw2(VBF_EWK,bins,"VBF_EWK3.root","jesdn");
-  Draw2(VBF_QCD,bins,"VBF_QCD_1.root","nom");
-  //Draw2(VBF_QCD,bins,"VBF_QCD3.root","jesup");
-  //Draw2(VBF_QCD,bins,"VBF_QCD3.root","jesdn");
-  Draw2(Top,bins,"Top_1.root","nom");
-  //Draw2(Top,bins,"Top3.root","jesup");
-  //Draw2(Top,bins,"Top3.root","jesdn");
-  Draw2(WJets,bins,"WJets_1.root","nom");
-  //Draw2(WJets,bins,"WJets3.root","jesup");
-  //Draw2(WJets,bins,"WJets3.root","jesdn");
-  Draw2(DYJets,bins,"DYJets_1.root","nom");
-  //Draw2(DYJets,bins,"DYJets3.root","jesup");
-  //Draw2(DYJets,bins,"DYJets3.root","jesdn");
+  Draw2(VBF_EWK,bins,"VBF_EWK_XX.root","nom");
+  Draw2(VBF_EWK,bins,"VBF_EWK_XX.root","jesup");
+  Draw2(VBF_EWK,bins,"VBF_EWK_XX.root","jesdn");
+  Draw2(VBF_QCD,bins,"VBF_QCD_XX.root","nom");
+  Draw2(VBF_QCD,bins,"VBF_QCD_XX.root","jesup");
+  Draw2(VBF_QCD,bins,"VBF_QCD_XX.root","jesdn");
+  Draw2(Top,bins,"Top_XX.root","nom");
+  Draw2(Top,bins,"Top_XX.root","jesup");
+  Draw2(Top,bins,"Top_XX.root","jesdn");
+  Draw2(WJets,bins,"WJets_XX.root","nom");
+  Draw2(WJets,bins,"WJets_XX.root","jesup");
+  Draw2(WJets,bins,"WJets_XX.root","jesdn");
+  Draw2(DYJets,bins,"DYJets_XX.root","nom");
+  Draw2(DYJets,bins,"DYJets_XX.root","jesup");
+  Draw2(DYJets,bins,"DYJets_XX.root","jesdn");
+  Draw2(DataM,bins,"DataM_XX.root","nom");
+  Draw2(DataE,bins,"DataE_XX.root","nom");
 
 
 }
@@ -272,6 +277,7 @@ void Draw2(vector<Sample> samp1, Binning bins, TString outfile, TString var) {
       intree->SetBranchAddress("vbf_maxpt_j2_pt_jes_up", &vbf_maxpt_j2_pt);
       intree->SetBranchAddress("vbf_maxpt_jj_m_jes_up", &vbf_maxpt_jj_m);      
       intree->SetBranchAddress("mass_lvj_type0_PuppiAK8_jes_up", &mass_lvj_type0_PuppiAK8);
+      intree->SetBranchAddress("mass_llj_PuppiAK8", &mass_llj_PuppiAK8);    
     }
     else if (var=="jesdn"){
       intree->SetBranchAddress("ungroomed_PuppiAK8_jet_mass_jes_dn", &PuppiAK8_jet_mass_so_corr);
@@ -279,6 +285,7 @@ void Draw2(vector<Sample> samp1, Binning bins, TString outfile, TString var) {
       intree->SetBranchAddress("vbf_maxpt_j2_pt_jes_dn", &vbf_maxpt_j2_pt);
       intree->SetBranchAddress("vbf_maxpt_jj_m_jes_dn", &vbf_maxpt_jj_m);      
       intree->SetBranchAddress("mass_lvj_type0_PuppiAK8_jes_dn", &mass_lvj_type0_PuppiAK8);
+      intree->SetBranchAddress("mass_llj_PuppiAK8", &mass_llj_PuppiAK8);    
     }
     else {
       intree->SetBranchAddress("PuppiAK8_jet_mass_so_corr", &PuppiAK8_jet_mass_so_corr);
@@ -310,17 +317,19 @@ void Draw2(vector<Sample> samp1, Binning bins, TString outfile, TString var) {
       
       if ( !(nBTagJet_loose==0 &&
 	     ((PuppiAK8_jet_mass_so_corr>65) && (PuppiAK8_jet_mass_so_corr<105)) &&
-	     ((vbf_maxpt_j1_pt>30) && (vbf_maxpt_j2_pt>30)) && l_pt1>50) ) continue;
+	     ((vbf_maxpt_j1_pt>30) && (vbf_maxpt_j2_pt>30))) ) continue;
 
-      if ( !( type==0 && abs(l_eta1)<2.4) ) continue;
+      if ( !(l_pt1>30 && (((type==0)&&(abs(l_eta1)<2.4)) || ((type==1)&&((abs(l_eta1)<2.5)&&!(abs(l_eta1)>1.4442 && abs(l_eta1)<1.566))))) ) continue;
 
       bool isZ=false;
 
       if ( l_pt2>30 && (((type==0)&&(abs(l_eta2)<2.4)) || ((type==1)&&((abs(l_eta2)<2.5)&&!(abs(l_eta2)>1.4442 && abs(l_eta2)<1.566)))) && 
 	   dilep_m>76 && dilep_m<107 ) isZ=true;
-      else if ( ! ( l_pt2<0 && (((type==0)&&(pfMET_Corr>50)) || ((type==1)&&(pfMET_Corr>80))) ) ) continue;
+
+      if (!isZ && !( l_pt2<0 && (((type==0)&&(pfMET_Corr>30)) || ((type==1)&&(pfMET_Corr>50))) ) ) continue;
 
       float weight=(samp1.at(xx).xsec*samp1.at(xx).xsecCorr*lumi*genWeight*trig_eff_Weight*id_eff_Weight*pu_Weight*btag0Wgt)/(1.0*(samp1.at(xx).nEvents-2*samp1.at(xx).nNegEvents));
+
       if (samp1.at(xx).sampname=="dataM" || samp1.at(xx).sampname=="dataE") weight=1.0;
 
       float deta=abs(vbf_maxpt_j2_eta-vbf_maxpt_j1_eta);
@@ -334,21 +343,22 @@ void Draw2(vector<Sample> samp1, Binning bins, TString outfile, TString var) {
 
 	    for (int k=0; k<bins.nBinsMVV; k++) {
 
-	      if (mass_lvj_type0_PuppiAK8 > bins.MVV_LE[k] && mass_lvj_type0_PuppiAK8 < bins.MVV_LE[k+1]) {
+	      if (!isZ && mass_lvj_type0_PuppiAK8 > bins.MVV_LE[k] && mass_lvj_type0_PuppiAK8 < bins.MVV_LE[k+1]) {
 
 		float indexVal = k + j*bins.nBinsMVV + i*bins.nBinsDETA*bins.nBinsMVV + 0.5;
-		if (isResolved && !isZ) {
-		  mWjj->Fill(indexVal, weight);
-		}
-		else if (isResolved && isZ) {
-		  mZjj->Fill(indexVal, weight);
-		}
-		else if (!isResolved && !isZ) {
+
+		if (isResolved) mWjj->Fill(indexVal, weight);
+		else if ((BosonCentrality_type0>1.0 && (abs(ZeppenfeldWL_type0)/abs(vbf_maxpt_j2_eta-vbf_maxpt_j1_eta))<0.3 && (abs(ZeppenfeldWH)/abs(vbf_maxpt_j2_eta-vbf_maxpt_j1_eta))<0.3)) {
 		  mWV->Fill(indexVal, weight);
 		}
-		else if (!isResolved && isZ) {
-		  mZV->Fill(indexVal, weight);
-		}
+	      }
+	      else if (isZ && mass_llj_PuppiAK8 > bins.MVV_LE[k] && mass_llj_PuppiAK8 < bins.MVV_LE[k+1]) {
+
+		float indexVal = k + j*bins.nBinsMVV + i*bins.nBinsDETA*bins.nBinsMVV + 0.5;		
+
+		if (isResolved)  mZjj->Fill(indexVal, weight);
+		else mZV->Fill(indexVal, weight);
+
 	      }
 	    }
 	  }

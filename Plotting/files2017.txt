@@ -1,7 +1,7 @@
 #***********************************************************
 # name  file_location  xspb/lumipb  otherscale nMCevents       nMCNegEvents    colorcode       stackit
 #***********************************************************
-#dataE	/eos/cms/store/user/jlawhorn/WWTree_2019_08_13_13h34/WWTree_SingleElectronRun2017_31Mar2018.root 41530.0 1 1 0 1 0
+dataE	/eos/cms/store/user/jlawhorn/WWTree_2019_08_13_13h34/WWTree_SingleElectronRun2017_31Mar2018.root 41530.0 1 1 0 1 0
 dataM	/eos/cms/store/user/jlawhorn/WWTree_2019_08_14_00h07/WWTree_SingleMuonRun2017_17Nov2017.root 41530.0 1 1 0 1 0
 #***********************************************************
 VBF_EWK	/eos/cms/store/user/jlawhorn/WWTreeWithFixedJEC/VBS_EWK/WWTree_WminusTo2JZTo2LJJ_EWK_LO_SM_MJJ100PTJ10_TuneCUETP8M1_13TeV-madgraph-pythia8.root       0.02982 1 189086.0 0.0 840 0
