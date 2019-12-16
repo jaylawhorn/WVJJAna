@@ -1,5 +1,11 @@
 # Prerequisites
 *.d
+*.pcm
+
+#images
+*.png
+*.pdf
+*.root
 
 # Compiled Object files
 *.slo

@@ -6,6 +6,7 @@
 #include <TCanvas.h>
 #include <TLegend.h>
 #include <TStyle.h>
+#include <TLine.h>
 #include <TH1D.h>
 #include <TH2D.h>
 #include <vector>
@@ -18,17 +19,33 @@
 
 void MakePlots() {
 
-  TFile *fVBFEWK = new TFile("VBF_EWK_2016loose_drawM.root","READ");
-  TFile *fVBFQCD = new TFile("VBF_QCD_2016loose_drawM.root","READ");
-  TFile *fTop    = new TFile("Top_2016loose_drawM.root",    "READ");
-  TFile *fWJets  = new TFile("WJets_2016loose_drawM.root",  "READ");
-  TFile *fDYJets = new TFile("DYJets_2016loose_drawM.root", "READ");
-  TFile *fDataM  = new TFile("DataM_2016loose_drawM.root",  "READ");
+  TFile *fVBFEWK = new TFile("VBF_EWK_2016_Dec5.root","READ");
+  TFile *fVBFQCD = new TFile("VBF_QCD_2016_Dec5.root","READ");
+  TFile *fTop    = new TFile("Top_2016_Dec5.root",    "READ");
+  TFile *fWJets  = new TFile("WJets_2016_Dec5.root",  "READ");
+  TFile *fDYJets = new TFile("DYJets_2016_Dec5.root", "READ");
+  TFile *fDataM  = new TFile("DataM_2016_Dec5.root",  "READ");
 
-  TCanvas *c1 = new TCanvas("c1","c1",800,600);
+  TCanvas *c1 = new TCanvas("c1","c1",800,800);
   gStyle->SetOptStat(0);
-  c1->SetLogy();
+  c1->Divide(1,2,0,0);
+  c1->cd(1)->SetPad(0,0.3,1.0,1.0);
+  c1->cd(1)->SetTopMargin(0.1);
+  c1->cd(1)->SetBottomMargin(0.01);
+  c1->cd(1)->SetLeftMargin(0.18);  
+  c1->cd(1)->SetRightMargin(0.07);  
+  c1->cd(1)->SetTickx(1);
+  c1->cd(1)->SetTicky(1);  
+  c1->cd(2)->SetPad(0,0,1.0,0.3);
+  c1->cd(2)->SetTopMargin(0.05);
+  c1->cd(2)->SetBottomMargin(0.45);
+  c1->cd(2)->SetLeftMargin(0.18);
+  c1->cd(2)->SetRightMargin(0.07);
+  c1->cd(2)->SetTickx(1);
+  c1->cd(2)->SetTicky(1);
+  gStyle->SetTitleOffset(1.400,"Y");
 
+  c1->cd(1)->SetLogy();
   TLegend *l = new TLegend(0.75,0.75,0.9,0.9);
 
   TString jj[4] = { "Wjj","WV","Zjj","ZV" };
@@ -47,51 +64,85 @@ void MakePlots() {
       TH1D *hWJets  = (TH1D*) fWJets->Get(Form("WJets_%s_%s",ii[x].Data(),jj[y].Data()));
       TH1D *hDYJets = (TH1D*) fDYJets->Get(Form("DYJets_%s_%s",ii[x].Data(),jj[y].Data()));
       TH1D *hDataM  = (TH1D*) fDataM->Get(Form("dataM_%s_%s",ii[x].Data(),jj[y].Data()));
+      TH1D *hDiff   = (TH1D*) hDataM->Clone("diff");
 
       hVBFEWK->SetFillColor(840);
       hVBFEWK->SetLineColor(840);
-      hVBFQCD->SetFillColor(400);
-      hVBFQCD->SetLineColor(400);
+      hVBFQCD->SetFillColor(TColor::GetColor(250,202,255));
+      hVBFQCD->SetLineColor(TColor::GetColor(250,202,255));
       hTop->SetFillColor(592);
       hTop->SetLineColor(592);
-      hWJets->SetFillColor(924);
-      hWJets->SetLineColor(924);
-      hDYJets->SetFillColor(4);
-      hDYJets->SetLineColor(4);
+      hWJets->SetFillColor(TColor::GetColor(222,90,106));
+      hWJets->SetLineColor(TColor::GetColor(222,90,106));
+      hDYJets->SetFillColor(TColor::GetColor(222,90,106));
+      hDYJets->SetLineColor(TColor::GetColor(222,90,106));
       
       hDataM->SetLineColor(kBlack);
       hDataM->SetMarkerColor(kBlack);
       hDataM->SetMarkerStyle(20);
       hDataM->SetMarkerSize(1.2);
-      
-      hDYJets->Add(hVBFEWK);
-      hVBFQCD->Add(hDYJets);
-      hWJets->Add(hVBFQCD);
+
+      hVBFQCD->Add(hVBFEWK);      
+      hDYJets->Add(hVBFQCD);
+      hWJets->Add(hDYJets);
       hTop->Add(hWJets);
+
+      hDiff->Divide(hTop);
       
       hTop->SetTitle("");
       
       float minaxis = hTop->GetMinimum() < hDataM->GetMinimum() ? hTop->GetMinimum() : hDataM->GetMinimum();
       if (minaxis<0.01) minaxis=1;
       float maxaxis = hTop->GetMaximum() > hDataM->GetMaximum() ? hTop->GetMaximum() : hDataM->GetMaximum();
-      hTop->GetYaxis()->SetRangeUser(0.5*minaxis,50*maxaxis);
+      hTop->GetYaxis()->SetRangeUser(0.1,50*maxaxis);
+      c1->cd(1);
       hTop->Draw("hist");
       hWJets->Draw("histsame");
-      hVBFQCD->Draw("histsame");
       hDYJets->Draw("histsame");
+      hVBFQCD->Draw("histsame");
       hVBFEWK->Draw("histsame");
       hDataM->Draw("same");
       
       l->Clear();
       l->AddEntry(hDataM, "Data","pl");
       l->AddEntry(hTop,   "Top","f");
-      l->AddEntry(hWJets, "WJets","f");
+      l->AddEntry(hDYJets, "VJets","f");
       l->AddEntry(hVBFQCD, "VV QCD","f");
-      l->AddEntry(hDYJets, "DYJets","f");
       l->AddEntry(hVBFEWK, "VBS EWK","f");
       l->Draw();
-    
-      c1->SaveAs(Form("%s_%s.png",ii[x].Data(),jj[y].Data()));
+
+      c1->cd(2);
+
+      hDiff->SetMarkerStyle(8);
+      hDiff->SetMarkerSize(1.25);
+      hDiff->GetYaxis()->SetRangeUser(0,5);
+      hDiff->GetXaxis()->SetTitleOffset(0.9);
+      hDiff->GetXaxis()->SetTitleSize(0.15);
+      hDiff->GetXaxis()->SetLabelSize(0.15);
+      hDiff->GetYaxis()->SetTitleSize(0.1);
+      hDiff->GetYaxis()->SetTitleOffset(0.5);
+      hDiff->GetYaxis()->CenterTitle(true);
+      hDiff->GetYaxis()->SetLabelSize(0.1);
+      hDiff->GetYaxis()->SetTitle("Data/MC");
+      hDiff->SetTitle("");
+
+      //hWJets->Draw("axis");
+      //hDiff->GetYaxis()->SetRangeUser(0,2);
+
+      hDiff->GetXaxis()->SetNdivisions(505);
+      hDiff->GetYaxis()->SetNdivisions(505);
+
+      hDiff->Draw("pe");
+
+      //float minX = hDiff->GetBinLowEdge(1);
+      //float maxX = hDiff->GetBinLowEdge(hDiff->GetNbinsX())+hDiff->GetBinWidth(hDiff->GetNbinsX());
+
+      //TLine lup(minX, 5, maxX, 5);
+      //TLine ldn(minX, -5, maxX, -5);
+      //lup.Draw("same");
+      //ldn.Draw("same");
+
+      c1->SaveAs(Form("%s_%s_2016.png",ii[x].Data(),jj[y].Data()));
     }
   }
   

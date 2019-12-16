@@ -20,21 +20,17 @@ struct Sample {
   string filename;
   float  xsec;
   float  xsecCorr;
-  int    nEvents;
-  int    nNegEvents;
   int    fillColor;
   bool   doStack;
 };
 
-Sample makeSample(string sname, string fname, float xsec, float xsecCorr, 
-		  int nEvents, int nNegEvents) {
+Sample makeSample(string sname, string fname, float xsec, float xsecCorr) {
+
   Sample ret;
   ret.sampname=sname;
   ret.filename=fname;
   ret.xsec=xsec;
   ret.xsecCorr=xsecCorr;
-  ret.nEvents=nEvents;
-  ret.nNegEvents=nNegEvents;
 
   return ret;
 };
@@ -78,8 +74,6 @@ void DoDrawing() {
   string filename;
   float  xsec;
   float  xsecCorr;
-  int    nEvents;
-  int    nNegEvents;
   int    fillColor;
   bool   doStack;
 
@@ -92,7 +86,7 @@ void DoDrawing() {
   vector<Sample> DYJets;
 
   ifstream ifs;
-  ifs.open("files.txt");
+  ifs.open("files2016.txt");
   assert(ifs.is_open());
   string line;
 
@@ -101,58 +95,59 @@ void DoDrawing() {
     if(line[0]=='#') continue;
     stringstream ss(line);
 
-    ss >> sampname >> filename >> xsec >> xsecCorr >> nEvents >> nNegEvents;
+    ss >> sampname >> filename >> xsec >> xsecCorr;
     
     if (sampname == "VBF_EWK") {
       int index=VBF_EWK.size();
-      VBF_EWK.push_back(makeSample(sampname, filename, xsec, xsecCorr, nEvents, nNegEvents));
+      VBF_EWK.push_back(makeSample(sampname, filename, xsec, xsecCorr));
     }
     else if (sampname == "VBF_QCD") {
       int index=VBF_QCD.size();
-      VBF_QCD.push_back(makeSample(sampname, filename, xsec, xsecCorr, nEvents, nNegEvents));
+      VBF_QCD.push_back(makeSample(sampname, filename, xsec, xsecCorr));
     }
     else if (sampname == "Top") {
       int index=Top.size();
-      Top.push_back(makeSample(sampname, filename, xsec, xsecCorr, nEvents, nNegEvents));
+      Top.push_back(makeSample(sampname, filename, xsec, xsecCorr));
     }
     else if (sampname == "WJets") {
       int index=WJets.size();
-      WJets.push_back(makeSample(sampname, filename, xsec, xsecCorr, nEvents, nNegEvents));
+      WJets.push_back(makeSample(sampname, filename, xsec, xsecCorr));
     }
     else if (sampname == "DYJets") {
       int index=DYJets.size();
-      DYJets.push_back(makeSample(sampname, filename, xsec, xsecCorr, nEvents, nNegEvents));
+      DYJets.push_back(makeSample(sampname, filename, xsec, xsecCorr));
     }
     else if (sampname == "dataE") {
       int index=DataE.size();
-      DataE.push_back(makeSample(sampname, filename, xsec, xsecCorr, nEvents, nNegEvents));
+      DataE.push_back(makeSample(sampname, filename, xsec, xsecCorr));
     }
     else if (sampname == "dataM") {
       int index=DataM.size();
-      DataM.push_back(makeSample(sampname, filename, xsec, xsecCorr, nEvents, nNegEvents));
+      DataM.push_back(makeSample(sampname, filename, xsec, xsecCorr));
     }
   }
 
 
   const int nBinsMVBF=4;
-  const int nBinsDETA=4;
-  const int nBinsMVV=7;
+  const int nBinsDETA=3;
+  const int nBinsMVV=4;
   float MVBF_LE[nBinsMVBF+1] = { 500, 600, 800, 1000, 3000 };
   //float MVBF_LE[nBinsMVBF+1] = { 600, 800, 1200, 3000 };
-  float DETA_LE[nBinsDETA+1] = { 3.0, 4.0, 5.0, 6.0, 10.0 };
-  //float DETA_LE[nBinsDETA+1] = { 4.0, 5.0, 6.0, 10.0 };
-  float MVV_LE[nBinsMVV+1] = {150, 300, 450, 600, 1075, 1550, 2025, 2500};
+  //float DETA_LE[nBinsDETA+1] = { 3.0, 4.0, 5.0, 6.0, 10.0 };
+  float DETA_LE[nBinsDETA+1] = { 4.0, 5.0, 6.0, 10.0 };
+  //float MVV_LE[nBinsMVV+1] = {150, 300, 450, 600, 1075, 1550, 2025, 2500};
+  float MVV_LE[nBinsMVV+1] = {600, 1075, 1550, 2025, 2500};
   
   Binning bins=makeBinning(nBinsMVBF, nBinsDETA, nBinsMVV, 
 			   MVBF_LE, DETA_LE, MVV_LE);
 
-  Draw2(VBF_EWK,bins,"VBF_EWK_2016loose_drawM.root","nom");
-  Draw2(VBF_QCD,bins,"VBF_QCD_2016loose_drawM.root","nom");
-  Draw2(Top,bins,"Top_2016loose_drawM.root","nom");
-  Draw2(WJets,bins,"WJets_2016loose_drawM.root","nom");
-  Draw2(DYJets,bins,"DYJets_2016loose_drawM.root","nom");
-  Draw2(DataM,bins,"DataM_2016loose_drawM.root","nom");
-  //Draw2(DataE,bins,"DataE_2016loose_drawE.root","nom");
+  Draw2(VBF_EWK,bins,"VBF_EWK_2016_Dec5.root","nom");
+  Draw2(VBF_QCD,bins,"VBF_QCD_2016_Dec5.root","nom");
+  Draw2(Top,bins,"Top_2016_Dec5.root","nom");
+  Draw2(WJets,bins,"WJets_2016_Dec5.root","nom");
+  Draw2(DYJets,bins,"DYJets_2016_Dec5.root","nom");
+  Draw2(DataM,bins,"DataM_2016_Dec5.root","nom");
+  //Draw2(DataE,bins,"DataE_2016_Dec5.root","nom");
 
 
 }
@@ -289,7 +284,7 @@ void Draw2(vector<Sample> samp1, Binning bins, TString outfile, TString var) {
   TH1D* mVBF_ZV = new TH1D(histName, histName, bins.nBinsMVBF, &bins.MVBF_LE[0]);
   mVBF_ZV->Sumw2();
   mVBF_ZV->SetTitle(TString(samp1.at(0).sampname));
-  mVBF_Zjj->GetXaxis()->SetTitle("m(VBF), ZV");
+  mVBF_ZV->GetXaxis()->SetTitle("m(VBF), ZV");
 
   histName = Form("%s_mVJ_ZV",samp1.at(0).sampname.c_str());
   TH1D* mVJ_ZV = new TH1D(histName, histName, 24, 30, 150);
@@ -306,169 +301,200 @@ void Draw2(vector<Sample> samp1, Binning bins, TString outfile, TString var) {
   Float_t lumi=35867.06;
   //Float_t lumi=41530.0;
 
-  Bool_t  isResolved;
-  Int_t   type;
-  Float_t genWeight=1, pu_Weight=1, btag0Wgt=1, id_eff_Weight=1, trig_eff_Weight=1;
-  Float_t l_pt1=0, l_eta1=0, l_phi1=0, l_e1=0;
-  Float_t l_pt2=0, l_eta2=0, l_phi2=0, l_e2=0;
+  const float MUON_MASS = 0.1056583745;
+  const float ELE_MASS  = 0.000511;
+
+  //Float_t genWeight=1, pu_Weight=1, btag0Wgt=1, id_eff_Weight=1, trig_eff_Weight=1;
+  Float_t genWeight=1, puWeight=1, lep1_idEffWeight=1, lep2_idEffWeight=1;
+  Float_t L1PFWeight=1;
+  Float_t lep1_pt=0, lep1_eta=0, lep1_phi=0, lep1_m=0; 
+  Float_t lep2_pt=0, lep2_eta=0, lep2_phi=0, lep2_m=0;
   Float_t dilep_pt=0, dilep_eta=0, dilep_phi=0, dilep_m=0;
-  Float_t pfMET_Corr=0, pfMET_Corr_phi=0;
-  Float_t nu_pz_type0=0;
-
-  Float_t AK4_vjet1_pt=0, AK4_vjet1_eta=0, AK4_vjet1_phi=0, AK4_vjet1_e=0;
-  Float_t AK4_vjet2_pt=0, AK4_vjet2_eta=0, AK4_vjet2_phi=0, AK4_vjet2_e=0;
-  Float_t ungroomed_PuppiAK8_jet_pt=0, ungroomed_PuppiAK8_jet_eta=0, ungroomed_PuppiAK8_jet_phi=0, ungroomed_PuppiAK8_jet_e=0;
-  Float_t PuppiAK8_jet_mass_so_corr=0;
-
-  Float_t vbf_maxpt_j1_pt=0, vbf_maxpt_j1_eta=0, vbf_maxpt_j1_phi=0, vbf_maxpt_j1_e=0, vbf_maxpt_j1_mass=0;
-  Float_t vbf_maxpt_j2_pt=0, vbf_maxpt_j2_eta=0, vbf_maxpt_j2_phi=0, vbf_maxpt_j2_e=0, vbf_maxpt_j2_mass=0;
-
-  Int_t   nBTagJet_loose=0;
-  Float_t vbf_maxpt_jj_m=0, mass_lvj_type0_PuppiAK8=0, BosonCentrality_type0=0, ZeppenfeldWL_type0=0, ZeppenfeldWH=0;
-  Float_t mass_llj_PuppiAK8=0;
+  Float_t MET=0, MET_2017raw=0, pfMET_Corr_phi=0, neu_pz_type0=0;
+  Float_t bos_j1_AK4_pt=0, bos_j1_AK4_eta=0, bos_j1_AK4_phi=0, bos_j1_AK4_m=0; 
+  Float_t bos_j2_AK4_pt=0, bos_j2_AK4_eta=0, bos_j2_AK4_phi=0, bos_j2_AK4_m=0;
+  Float_t bos_AK4AK4_pt=0, bos_AK4AK4_eta=0, bos_AK4AK4_phi=0, bos_AK4AK4_m=0;
+  Float_t bos_PuppiAK8_pt=0, bos_PuppiAK8_eta=0, bos_PuppiAK8_phi=0, bos_PuppiAK8_m_sd0_corr=0;
+  Float_t bos_PuppiAK8_tau2tau1=0;
+  Float_t vbf1_AK4_pt=0, vbf1_AK4_eta=0, vbf1_AK4_phi=0, vbf1_AK4_m=0;
+  Float_t vbf2_AK4_pt=0, vbf2_AK4_eta=0, vbf2_AK4_phi=0, vbf2_AK4_m=0;
+  Float_t vbf_m=0, vbf_deta=0, dibos_m=0;
+  Int_t nBtag_loose=0;
+  Float_t bosCent=0, zeppLep=0, zeppHad=0;
 
   for (uint xx=0; xx<samp1.size(); xx++) {
     cout << samp1.at(xx).filename << endl;
 
     TFile* infile = new TFile(TString(samp1.at(xx).filename), "READ");   assert(infile);
-    TTree* intree = (TTree*) infile->Get("otree"); assert(intree);
+    TTree* intree = (TTree*) infile->Get("Events"); assert(intree);
 
-    intree->SetBranchAddress("isResolved", &isResolved);
-    intree->SetBranchAddress("type", &type);
+    int nTotal=1, nNeg=1;
+    if (!(samp1.at(xx).sampname=="dataM" || samp1.at(xx).sampname=="dataE")) {
+
+      TH1F* hTotEvents = (TH1F*) infile->Get("TotalEvents"); assert(hTotEvents);
+      nTotal = hTotEvents->GetBinContent(2);
+      nNeg = hTotEvents->GetBinContent(1);
+    }
+
     intree->SetBranchAddress("genWeight",&genWeight);
-    intree->SetBranchAddress("pu_Weight",&pu_Weight);
-    intree->SetBranchAddress("btag0Wgt",&btag0Wgt);
-    intree->SetBranchAddress("id_eff_Weight",&id_eff_Weight);
-    intree->SetBranchAddress("trig_eff_Weight",&trig_eff_Weight);
+    intree->SetBranchAddress("puWeight",&puWeight);
+    intree->SetBranchAddress("L1PFWeight",&L1PFWeight);
+    intree->SetBranchAddress("lep1_idEffWeight",&lep1_idEffWeight);
+    intree->SetBranchAddress("lep2_idEffWeight",&lep2_idEffWeight);
     
-    intree->SetBranchAddress("l_pt1", &l_pt1);
-    intree->SetBranchAddress("l_eta1", &l_eta1);
-    intree->SetBranchAddress("l_phi1", &l_phi1);
-    intree->SetBranchAddress("l_e2", &l_e1);
-    intree->SetBranchAddress("l_pt2", &l_pt2);
-    intree->SetBranchAddress("l_eta2", &l_eta2);
-    intree->SetBranchAddress("l_phi2", &l_phi2);
-    intree->SetBranchAddress("l_e2", &l_e2);
+    intree->SetBranchAddress("lep1_pt", &lep1_pt);
+    intree->SetBranchAddress("lep1_eta", &lep1_eta);
+    intree->SetBranchAddress("lep1_phi", &lep1_phi);
+    intree->SetBranchAddress("lep1_m", &lep1_m);
+    intree->SetBranchAddress("lep2_pt", &lep2_pt);
+    intree->SetBranchAddress("lep2_eta", &lep2_eta);
+    intree->SetBranchAddress("lep2_phi", &lep2_phi);
+    intree->SetBranchAddress("lep2_m", &lep2_m);
     
     intree->SetBranchAddress("dilep_pt", &dilep_pt);
     intree->SetBranchAddress("dilep_eta", &dilep_eta);
     intree->SetBranchAddress("dilep_phi", &dilep_phi);
     intree->SetBranchAddress("dilep_m", &dilep_m);
     
-    intree->SetBranchAddress("pfMET_Corr", &pfMET_Corr);
-    intree->SetBranchAddress("pfMET_Corr_phi", &pfMET_Corr_phi);
-    intree->SetBranchAddress("nu_pz_type0", &nu_pz_type0);
+    intree->SetBranchAddress("MET", &MET);
+    //intree->SetBranchAddress("MET_2017raw", &MET_2017raw);
+    intree->SetBranchAddress("MET_phi", &pfMET_Corr_phi);
+    intree->SetBranchAddress("neu_pz_type0", &neu_pz_type0);
     
-    intree->SetBranchAddress("AK8jet_sj1_pt", &AK4_vjet1_pt); //temporary fix
-    intree->SetBranchAddress("AK4_vjet1_eta", &AK4_vjet1_eta);
-    intree->SetBranchAddress("AK4_vjet1_phi", &AK4_vjet1_phi);
-    intree->SetBranchAddress("AK4_vjet1_e", &AK4_vjet1_e);
-    intree->SetBranchAddress("AK4_vjet2_pt", &AK4_vjet2_pt);
-    intree->SetBranchAddress("AK4_vjet2_eta", &AK4_vjet2_eta);
-    intree->SetBranchAddress("AK4_vjet2_phi", &AK4_vjet2_phi);
-    intree->SetBranchAddress("AK4_vjet2_e", &AK4_vjet2_e);
-    
-    intree->SetBranchAddress("ungroomed_PuppiAK8_jet_pt", &ungroomed_PuppiAK8_jet_pt);
-    intree->SetBranchAddress("ungroomed_PuppiAK8_jet_eta", &ungroomed_PuppiAK8_jet_eta);
-    intree->SetBranchAddress("ungroomed_PuppiAK8_jet_phi", &ungroomed_PuppiAK8_jet_phi);
-    intree->SetBranchAddress("ungroomed_PuppiAK8_jet_e", &ungroomed_PuppiAK8_jet_e);
-    //missing W(jj) jet scale uncertainties
-    if (var=="jesup") {
-      intree->SetBranchAddress("ungroomed_PuppiAK8_jet_mass_jes_up", &PuppiAK8_jet_mass_so_corr);
-      intree->SetBranchAddress("vbf_maxpt_j1_pt_jes_up", &vbf_maxpt_j1_pt);
-      intree->SetBranchAddress("vbf_maxpt_j2_pt_jes_up", &vbf_maxpt_j2_pt);
-      intree->SetBranchAddress("vbf_maxpt_jj_m_jes_up", &vbf_maxpt_jj_m);      
-      intree->SetBranchAddress("mass_lvj_type0_PuppiAK8_jes_up", &mass_lvj_type0_PuppiAK8);
-      intree->SetBranchAddress("mass_llj_PuppiAK8", &mass_llj_PuppiAK8);    
-    }
-    else if (var=="jesdn"){
-      intree->SetBranchAddress("ungroomed_PuppiAK8_jet_mass_jes_dn", &PuppiAK8_jet_mass_so_corr);
-      intree->SetBranchAddress("vbf_maxpt_j1_pt_jes_dn", &vbf_maxpt_j1_pt);
-      intree->SetBranchAddress("vbf_maxpt_j2_pt_jes_dn", &vbf_maxpt_j2_pt);
-      intree->SetBranchAddress("vbf_maxpt_jj_m_jes_dn", &vbf_maxpt_jj_m);      
-      intree->SetBranchAddress("mass_lvj_type0_PuppiAK8_jes_dn", &mass_lvj_type0_PuppiAK8);
-      intree->SetBranchAddress("mass_llj_PuppiAK8", &mass_llj_PuppiAK8);    
-    }
-    else {
-      intree->SetBranchAddress("PuppiAK8_jet_mass_so_corr", &PuppiAK8_jet_mass_so_corr);
-      intree->SetBranchAddress("vbf_maxpt_j1_pt", &vbf_maxpt_j1_pt);
-      intree->SetBranchAddress("vbf_maxpt_j2_pt", &vbf_maxpt_j2_pt);
-      intree->SetBranchAddress("vbf_maxpt_jj_m", &vbf_maxpt_jj_m);      
-      intree->SetBranchAddress("mass_lvj_type0_PuppiAK8", &mass_lvj_type0_PuppiAK8);
-      intree->SetBranchAddress("mass_llj_PuppiAK8", &mass_llj_PuppiAK8);    
-    }
-    
-    intree->SetBranchAddress("vbf_maxpt_j1_eta", &vbf_maxpt_j1_eta);
-    intree->SetBranchAddress("vbf_maxpt_j1_phi", &vbf_maxpt_j1_phi);
-    intree->SetBranchAddress("vbf_maxpt_j1_e", &vbf_maxpt_j1_e);
-    intree->SetBranchAddress("vbf_maxpt_j1_mass", &vbf_maxpt_j1_mass);
+    intree->SetBranchAddress("bos_j1_AK4_pt",  &bos_j1_AK4_pt);
+    intree->SetBranchAddress("bos_j1_AK4_eta", &bos_j1_AK4_eta);
+    intree->SetBranchAddress("bos_j1_AK4_phi", &bos_j1_AK4_phi);
+    intree->SetBranchAddress("bos_j1_AK4_m",   &bos_j1_AK4_m);
+    intree->SetBranchAddress("bos_j2_AK4_pt",  &bos_j2_AK4_pt);
+    intree->SetBranchAddress("bos_j2_AK4_eta", &bos_j2_AK4_eta);
+    intree->SetBranchAddress("bos_j2_AK4_phi", &bos_j2_AK4_phi);
+    intree->SetBranchAddress("bos_j2_AK4_m",   &bos_j2_AK4_m);
 
-    intree->SetBranchAddress("vbf_maxpt_j2_eta", &vbf_maxpt_j2_eta);
-    intree->SetBranchAddress("vbf_maxpt_j2_phi", &vbf_maxpt_j2_phi);
-    intree->SetBranchAddress("vbf_maxpt_j2_e", &vbf_maxpt_j2_e);
-    intree->SetBranchAddress("vbf_maxpt_j2_mass", &vbf_maxpt_j2_mass);
-    
-    intree->SetBranchAddress("nBTagJet_loose", &nBTagJet_loose);
+    intree->SetBranchAddress("bos_AK4AK4_pt",   &bos_AK4AK4_pt);
+    intree->SetBranchAddress("bos_AK4AK4_eta",   &bos_AK4AK4_eta);
+    intree->SetBranchAddress("bos_AK4AK4_phi",   &bos_AK4AK4_phi);
+    intree->SetBranchAddress("bos_AK4AK4_m",   &bos_AK4AK4_m);
 
-    intree->SetBranchAddress("BosonCentrality_type0", &BosonCentrality_type0);
-    intree->SetBranchAddress("ZeppenfeldWL_type0", &ZeppenfeldWL_type0);
-    intree->SetBranchAddress("ZeppenfeldWH", &ZeppenfeldWH);    
+    intree->SetBranchAddress("bos_PuppiAK8_pt",  &bos_PuppiAK8_pt);
+    intree->SetBranchAddress("bos_PuppiAK8_eta", &bos_PuppiAK8_eta);
+    intree->SetBranchAddress("bos_PuppiAK8_phi", &bos_PuppiAK8_phi);
+    intree->SetBranchAddress("bos_PuppiAK8_m_sd0_corr", &bos_PuppiAK8_m_sd0_corr);
+    intree->SetBranchAddress("bos_PuppiAK8_tau2tau1", &bos_PuppiAK8_tau2tau1);
+
+    intree->SetBranchAddress("vbf1_AK4_pt", &vbf1_AK4_pt);
+    intree->SetBranchAddress("vbf1_AK4_eta", &vbf1_AK4_eta);
+    intree->SetBranchAddress("vbf1_AK4_phi", &vbf1_AK4_phi);
+    intree->SetBranchAddress("vbf1_AK4_m", &vbf1_AK4_m);
+    intree->SetBranchAddress("vbf2_AK4_pt", &vbf2_AK4_pt);
+    intree->SetBranchAddress("vbf2_AK4_eta", &vbf2_AK4_eta);
+    intree->SetBranchAddress("vbf2_AK4_phi", &vbf2_AK4_phi);
+    intree->SetBranchAddress("vbf2_AK4_m", &vbf2_AK4_m);
+
+    intree->SetBranchAddress("vbf_m", &vbf_m);
+    //intree->SetBranchAddress("vbf_deta", &vbf_deta);
+
+    intree->SetBranchAddress("dibos_m", &dibos_m);
+    
+    intree->SetBranchAddress("nBtag_loose", &nBtag_loose);
+
+    intree->SetBranchAddress("bosCent", &bosCent);
+    intree->SetBranchAddress("zeppLep", &zeppLep);
+    intree->SetBranchAddress("zeppHad", &zeppHad);
+
+    cout << intree->GetEntries() << endl;
 
     for (int i=0; i<intree->GetEntries(); i++) {
+    //for (int i=0; i<200; i++) {
       intree->GetEntry(i);
-      
-      if ( !(nBTagJet_loose==0 &&
-	     //((PuppiAK8_jet_mass_so_corr>65) && (PuppiAK8_jet_mass_so_corr<105)) &&
-	     ((vbf_maxpt_j1_pt>30) && (vbf_maxpt_j2_pt>30))) ) continue;
 
-      //if ( !(l_pt1>35 && (((type==0)&&(abs(l_eta1)<2.4)) || ((type==1)&&((abs(l_eta1)<2.5)&&!(abs(l_eta1)>1.4442 && abs(l_eta1)<1.566))))) ) continue;
-      //if ( !(l_pt1>30 && ((type==1)&&((abs(l_eta1)<2.5)&&!(abs(l_eta1)>1.4442 && abs(l_eta1)<1.566))))) continue;
+      if ( !(nBtag_loose==0 && vbf1_AK4_pt>50 && vbf2_AK4_pt>50) ) continue;
+      //if ( !(nBtag_loose==0 && vbf1_AK4_pt>30 && vbf2_AK4_pt>30) ) continue;
+      //if ( !(vbf1_AK4_pt>50 && vbf2_AK4_pt>50) ) continue;
+      if ( vbf_m < 500) continue;
+      if ( fabs(vbf1_AK4_eta - vbf2_AK4_eta)<4.0) continue;
+      if ( dibos_m < 600) continue;
 
-      if ( !(l_pt1>30 && (((type==0)&&(abs(l_eta1)<2.4)) ))) continue;
+      bool isEle=false, isResolved=false, isZ=false;
 
-      bool isZ=false;
+      if (lep1_m == ELE_MASS) { isEle=true; }
+      else if (lep1_m == MUON_MASS) { isEle=false; }
+      else {
+	cout << "lepton is not electron or muon! skipping" << endl;
+	continue;
+      }
 
-      if ( l_pt2>30 && (((type==0)&&(abs(l_eta2)<2.4)) || ((type==1)&&((abs(l_eta2)<2.5)&&!(abs(l_eta2)>1.4442 && abs(l_eta2)<1.566)))) ) isZ=true;
-      //&& 
-      //   dilep_m>125 && dilep_m<150 ) isZ=true;
-      
-      if (!isZ && !( l_pt2<0 && (((type==0)&&(pfMET_Corr>30)) || ((type==1)&&(pfMET_Corr>50))) ) ) continue;
+      if (bos_PuppiAK8_m_sd0_corr > 0 && bos_AK4AK4_m < 0) { isResolved=false; }
+      else if (bos_PuppiAK8_m_sd0_corr < 0 && bos_AK4AK4_m > 0) { isResolved=true; }
+      else {
+	cout << "both or neither of resolved and boosted mass is defined" << endl;
+      }
 
-      float weight=(samp1.at(xx).xsec*samp1.at(xx).xsecCorr*lumi*genWeight*trig_eff_Weight*id_eff_Weight*pu_Weight*btag0Wgt)/(1.0*(samp1.at(xx).nEvents-2*samp1.at(xx).nNegEvents));
+      if (isResolved==true && (bos_AK4AK4_m<65 ||bos_AK4AK4_m>105)) continue;
+      if (isResolved==true && (bos_j1_AK4_pt<30 || bos_j2_AK4_pt<30)) continue;
+      if (isResolved==true && bos_AK4AK4_pt>200) continue;
+
+      if (isResolved==false && (bos_PuppiAK8_m_sd0_corr<65 ||bos_PuppiAK8_m_sd0_corr>105)) continue;
+      if (isResolved==false && bos_PuppiAK8_pt<200) continue;
+      if (isResolved==false && bos_PuppiAK8_tau2tau1>0.55) continue;
+
+      if (lep2_pt>0) isZ=true;
+
+      if (isEle==true && (lep1_pt<30 || abs(lep1_eta)>2.5 || (abs(lep1_eta)>1.4442 && abs(lep1_eta)<1.566))) continue;
+      //if (isEle==true && (lep1_pt<45 || abs(lep1_eta)>2.5 || (abs(lep1_eta)>1.4442 && abs(lep1_eta)<1.566))) continue;
+      if (isEle==false && (lep1_pt<30 || abs(lep1_eta)>2.4)) continue;
+      //if (isEle==false && (lep1_pt<45 || abs(lep1_eta)>2.4)) continue;
+
+      if (isEle==true) continue;
+      //if (isEle==false) continue;
+
+      if (isZ==true && isEle==true && (lep2_pt<30 || abs(lep2_eta)>2.5 || (abs(lep2_eta)>1.4442 && abs(lep2_eta)<1.566))) continue;
+      if (isZ==true && isEle==false && (lep2_pt<30 || abs(lep2_eta)>2.4)) continue;
+
+      if (isZ==false && isEle==true && MET<80) continue;
+      if (isZ==false && isEle==false && MET<50) continue;
+
+      float weight=(samp1.at(xx).xsec*samp1.at(xx).xsecCorr*lumi*genWeight*puWeight)/(1.0*(nTotal-2*nNeg));
+      //float weight=(samp1.at(xx).xsec*lumi*genWeight)/(1.0*(nTotal-2*nNeg));
 
       if (samp1.at(xx).sampname=="dataM" || samp1.at(xx).sampname=="dataE") weight=1.0;
 
-      float deta=abs(vbf_maxpt_j2_eta-vbf_maxpt_j1_eta);
+      //cout << weight << endl;
 
-      if (isResolved && !isZ) {
-	//mVV_Wjj->Fill(mass_lvj_type0_PuppiAK8, weight);
-	dETA_Wjj->Fill(deta, weight);
-	mVBF_Wjj->Fill(vbf_maxpt_jj_m, weight);
-	mVJ_Wjj->Fill(PuppiAK8_jet_mass_so_corr,weight);
-	MET_Wjj->Fill(pfMET_Corr,weight);
-	ptL_Wjj->Fill(l_pt1,weight);
+      if (isResolved==true && isZ==false) {
+
+	mVV_Wjj->Fill(dibos_m, weight);
+	dETA_Wjj->Fill(abs(vbf1_AK4_eta - vbf2_AK4_eta), weight);
+	mVBF_Wjj->Fill(vbf_m, weight);
+	mVJ_Wjj->Fill(bos_AK4AK4_m, weight);
+	MET_Wjj->Fill(MET, weight);
+	ptL_Wjj->Fill(lep1_pt, weight);
+      } 
+      else if (isResolved==false && isZ==false) {
+
+	//cout << weight << ", " << vbf_m << endl;
+
+	mVV_WV->Fill(dibos_m, weight);
+	dETA_WV->Fill(abs(vbf1_AK4_eta - vbf2_AK4_eta), weight);
+	mVBF_WV->Fill(vbf_m, weight);
+	mVJ_WV->Fill(bos_PuppiAK8_m_sd0_corr, weight);
+	MET_WV->Fill(MET, weight);
+	ptL_WV->Fill(lep1_pt,weight);
       }
-      else if (!isResolved && !isZ) {
-	//mVV_WV->Fill(mass_lvj_type0_PuppiAK8, weight);
-	dETA_WV->Fill(deta, weight);
-	mVBF_WV->Fill(vbf_maxpt_jj_m, weight);
-	mVJ_WV->Fill(PuppiAK8_jet_mass_so_corr,weight);
-	MET_WV->Fill(pfMET_Corr,weight);
-	ptL_WV->Fill(l_pt1,weight);
-      }
-      else if (isResolved) {
-	//mVV_Zjj->Fill(mass_llj_PuppiAK8, weight);
-	dETA_Zjj->Fill(deta, weight);
-	mVBF_Zjj->Fill(vbf_maxpt_jj_m, weight);
+      else if (isResolved==true && isZ==true) {
+
+	mVV_Zjj->Fill(dibos_m, weight);
+	dETA_Zjj->Fill(abs(vbf1_AK4_eta - vbf2_AK4_eta), weight);
+	mVBF_Zjj->Fill(vbf_m, weight);
 	mVL_Zjj->Fill(dilep_m,weight);
-	mVJ_Zjj->Fill(PuppiAK8_jet_mass_so_corr,weight);
+	mVJ_Zjj->Fill(bos_AK4AK4_m,weight);
       }
-      else {
-	//mVV_ZV->Fill(mass_llj_PuppiAK8, weight);
-	dETA_ZV->Fill(deta, weight);
-	mVBF_ZV->Fill(vbf_maxpt_jj_m, weight);
-	mVL_ZV->Fill(dilep_m,weight);
-	mVJ_ZV->Fill(PuppiAK8_jet_mass_so_corr,weight);
+      else if (isResolved==false && isZ==true) {
+
+	mVV_ZV->Fill(dibos_m, weight);
+	dETA_ZV->Fill(abs(vbf1_AK4_eta - vbf2_AK4_eta), weight);
+	mVBF_ZV->Fill(vbf_m, weight);
+	mVL_ZV->Fill(dilep_m, weight);
+	mVJ_ZV->Fill(bos_PuppiAK8_m_sd0_corr, weight);
 
       }
     }
