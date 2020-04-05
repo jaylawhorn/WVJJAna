@@ -19,12 +19,12 @@
 
 void MakePlots() {
 
-  TFile *fVBFEWK = new TFile("VBF_EWK_2016_Dec5.root","READ");
-  TFile *fVBFQCD = new TFile("VBF_QCD_2016_Dec5.root","READ");
-  TFile *fTop    = new TFile("Top_2016_Dec5.root",    "READ");
-  TFile *fWJets  = new TFile("WJets_2016_Dec5.root",  "READ");
-  TFile *fDYJets = new TFile("DYJets_2016_Dec5.root", "READ");
-  TFile *fDataM  = new TFile("DataM_2016_Dec5.root",  "READ");
+  TFile *fVBFEWK = new TFile("VBF_EWK_2016_loose_m.root","READ");
+  TFile *fVBFQCD = new TFile("VBF_QCD_2016_loose_m.root","READ");
+  TFile *fTop    = new TFile("Top_2016_loose_m.root",    "READ");
+  TFile *fWJets  = new TFile("WJets_2016_loose_m.root",  "READ");
+  TFile *fDYJets = new TFile("DYJets_2016_loose_m.root", "READ");
+  TFile *fDataM  = new TFile("DataM_2016_loose_m.root",  "READ");
 
   TCanvas *c1 = new TCanvas("c1","c1",800,800);
   gStyle->SetOptStat(0);
@@ -46,13 +46,14 @@ void MakePlots() {
   gStyle->SetTitleOffset(1.400,"Y");
 
   c1->cd(1)->SetLogy();
-  TLegend *l = new TLegend(0.75,0.75,0.9,0.9);
+  TLegend *l = new TLegend(0.6,0.65,0.9,0.85);
+  l->SetBorderSize(0);
 
   TString jj[4] = { "Wjj","WV","Zjj","ZV" };
-  TString ii[7] = { "mVV","dETA","mVBF","mVJ","MET","ptL","mVL"};
+  TString ii[9] = { "mVV","dETA","mVBF","mVJ","MET","ptL","mVL","ETA1","ETA2"};
 
   for (int y=0; y<4; y++) {
-    for (int x=0; x<7; x++) {
+    for (int x=0; x<9; x++) {
 
       if (x==0) continue;
       if (y>1 && (x==4 || x==5)) continue; 
@@ -66,8 +67,11 @@ void MakePlots() {
       TH1D *hDataM  = (TH1D*) fDataM->Get(Form("dataM_%s_%s",ii[x].Data(),jj[y].Data()));
       TH1D *hDiff   = (TH1D*) hDataM->Clone("diff");
 
-      hVBFEWK->SetFillColor(840);
-      hVBFEWK->SetLineColor(840);
+      //hVBFEWK->SetFillColor(840);
+      //hVBFEWK->SetLineColor(840);
+      hVBFEWK->SetLineColor(kBlack);
+      hVBFEWK->SetLineStyle(4);
+      hVBFEWK->SetLineWidth(3);
       hVBFQCD->SetFillColor(TColor::GetColor(250,202,255));
       hVBFQCD->SetLineColor(TColor::GetColor(250,202,255));
       hTop->SetFillColor(592);
@@ -82,11 +86,13 @@ void MakePlots() {
       hDataM->SetMarkerStyle(20);
       hDataM->SetMarkerSize(1.2);
 
-      hVBFQCD->Add(hVBFEWK);      
+      //hVBFQCD->Add(hVBFEWK);      
       hDYJets->Add(hVBFQCD);
       hWJets->Add(hDYJets);
       hTop->Add(hWJets);
 
+      hVBFEWK->Scale(10.0);
+      
       hDiff->Divide(hTop);
       
       hTop->SetTitle("");
@@ -108,14 +114,14 @@ void MakePlots() {
       l->AddEntry(hTop,   "Top","f");
       l->AddEntry(hDYJets, "VJets","f");
       l->AddEntry(hVBFQCD, "VV QCD","f");
-      l->AddEntry(hVBFEWK, "VBS EWK","f");
+      l->AddEntry(hVBFEWK, "VBS EWK (x10)","l");
       l->Draw();
 
       c1->cd(2);
 
       hDiff->SetMarkerStyle(8);
       hDiff->SetMarkerSize(1.25);
-      hDiff->GetYaxis()->SetRangeUser(0,5);
+      hDiff->GetYaxis()->SetRangeUser(0,3);
       hDiff->GetXaxis()->SetTitleOffset(0.9);
       hDiff->GetXaxis()->SetTitleSize(0.15);
       hDiff->GetXaxis()->SetLabelSize(0.15);
@@ -134,15 +140,15 @@ void MakePlots() {
 
       hDiff->Draw("pe");
 
-      //float minX = hDiff->GetBinLowEdge(1);
-      //float maxX = hDiff->GetBinLowEdge(hDiff->GetNbinsX())+hDiff->GetBinWidth(hDiff->GetNbinsX());
-
-      //TLine lup(minX, 5, maxX, 5);
+      float minX = hDiff->GetBinLowEdge(1);
+      float maxX = hDiff->GetBinLowEdge(hDiff->GetNbinsX())+hDiff->GetBinWidth(hDiff->GetNbinsX());
+      
+      TLine lup(minX, 1, maxX, 1);
       //TLine ldn(minX, -5, maxX, -5);
-      //lup.Draw("same");
+      lup.Draw("same");
       //ldn.Draw("same");
 
-      c1->SaveAs(Form("%s_%s_2016.png",ii[x].Data(),jj[y].Data()));
+      c1->SaveAs(Form("%s_%s_2016_loose_m.png",ii[x].Data(),jj[y].Data()));
     }
   }
   

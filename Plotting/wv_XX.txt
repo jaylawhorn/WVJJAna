@@ -1,8 +1,8 @@
 max * number of channels
 jmax * number of background
 kmax * number of nuisance parameters
-shapes * * comb_XX.root $PROCESS_$CHANNEL $PROCESS_$CHANNEL_$SYSTEMATIC
-shapes data_obs * comb_XX.root data_obs_$CHANNEL
+shapes * * comb_2017.root $PROCESS_$CHANNEL $PROCESS_$CHANNEL_$SYSTEMATIC
+shapes data_obs * comb_2017.root data_obs_$CHANNEL
 bin mWV
 Observation -1
 
@@ -21,5 +21,5 @@ norm_VVQCD        lnN  -           1.35     -        -	      -
 norm_top          lnN  -           -        1.10     -	      -
 norm_Vjets        lnN  -           -        -        1.10     -
 norm_Vjets        lnN  -           -        -        -	      1.10
-jes shape    	       1.0           1.0        1.0        1.0        1.0
+#jes shape    	       1.0           1.0        1.0        1.0        1.0
 
