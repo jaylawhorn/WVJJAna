@@ -1,0 +1,1 @@
+The file `MakeCards.C` is the histogramming mastermind, the files `*_XX.txt` are template datacards, and `comb.sh` runs the combine tool. This workflow was tested with `CMSSW_8_1_0` and the combine installation [here](https://cms-analysis.github.io/HiggsAnalysis-CombinedLimit/#slc6cc7-release-cmssw_8_1_x).
