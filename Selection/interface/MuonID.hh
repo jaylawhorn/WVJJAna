@@ -13,7 +13,7 @@ bool passMuonLoose(const baconhep::TMuon *muon)
   
   // PF-isolation with Delta-beta correction
   double iso = muon->chHadIso + TMath::Max(muon->neuHadIso + muon->gammaIso - 0.5*(muon->puIso), double(0));
-  if(iso >= 0.25*(muon->pt)) return false;
+  if(iso < 0.25*(muon->pt)) return false;
   
   return true;
 }
@@ -25,7 +25,7 @@ bool passMuonTight(const baconhep::TMuon *muon)
   
   // PF-isolation with Delta-beta correction
   double iso = muon->chHadIso + TMath::Max(muon->neuHadIso + muon->gammaIso - 0.5*(muon->puIso), double(0));
-  if(iso >= 0.15*(muon->pt)) return false;
+  if(iso < 0.15*(muon->pt)) return false;
   return true;
 }
 

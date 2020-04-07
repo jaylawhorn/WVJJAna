@@ -18,7 +18,7 @@ bool passEleLoose(const baconhep::TElectron *electron, float iso, int era) {
   //2016
   //https://twiki.cern.ch/twiki/bin/view/CMS/CutBasedElectronIdentificationRun2#Working_points_for_2016_data_for
     if(fabs(electron->scEta)<1.479) {
-      if(iso                          >= 0.0994*(electron->pt)) 
+      if(iso                          <  0.0994*(electron->pt)) 
 	return false;
       if(electron->sieie              >= 0.01100)
 	return false;
@@ -33,7 +33,7 @@ bool passEleLoose(const baconhep::TElectron *electron, float iso, int era) {
       if(electron->nMissingHits       >  1)
 	return false;
     } else {
-      if(iso                          >= 0.107*(electron->pt))
+      if(iso                          <  0.107*(electron->pt))
 	return false;
       if(electron->sieie              >= 0.03140)
 	return false;
@@ -55,7 +55,7 @@ bool passEleLoose(const baconhep::TElectron *electron, float iso, int era) {
     float rho = eleEffArea(electron->eta, era);
     
     if(fabs(electron->scEta)<1.479) {
-      if(iso >= 0.112 + 0.506/(electron->pt))
+      if(iso < 0.112 + 0.506/(electron->pt))
 	return false;
       if(electron->sieie              >= 0.0112)
 	return false;
@@ -70,7 +70,7 @@ bool passEleLoose(const baconhep::TElectron *electron, float iso, int era) {
       if(electron->nMissingHits       >  1)
 	return false;
     } else {
-      if(iso >= 0.108 + 0.963/(electron->pt))
+      if(iso < 0.108 + 0.963/(electron->pt))
 	return false;
       if(electron->sieie              >= 0.0425)
 	return false;
@@ -102,7 +102,7 @@ bool passEleTight(const baconhep::TElectron *electron, float iso, int era) {
     //2016
     //https://twiki.cern.ch/twiki/bin/view/CMS/CutBasedElectronIdentificationRun2#Working_points_for_2016_data_for
     if(fabs(electron->scEta)<1.479) {
-      if(iso                        >= 0.0588*(electron->pt))
+      if(iso                          <  0.0588*(electron->pt))
 	return false;
       if(electron->sieie              >= 0.00998)
 	return false;
@@ -117,7 +117,7 @@ bool passEleTight(const baconhep::TElectron *electron, float iso, int era) {
       if(electron->nMissingHits       >  1)
 	return false;
     } else {
-      if(iso                          >= 0.0571*(electron->pt)) 
+      if(iso                          <  0.0571*(electron->pt)) 
 	return false;
       if(electron->sieie              >= 0.02920)
 	return false;
@@ -139,7 +139,7 @@ bool passEleTight(const baconhep::TElectron *electron, float iso, int era) {
     float rho = eleEffArea(electron->eta,era);
     
     if(fabs(electron->scEta)<1.479) {
-      if(iso                          >= 0.0287 + 0.506/(electron->pt))
+      if(iso                          <  0.0287 + 0.506/(electron->pt))
 	return false;
       if(electron->sieie              >= 0.0104)
 	return false;
@@ -154,7 +154,7 @@ bool passEleTight(const baconhep::TElectron *electron, float iso, int era) {
       if(electron->nMissingHits       >  1)
 	return false;
     } else {
-      if(iso                          >= 0.0445 + 0.963/(electron->pt))
+      if(iso                          <  0.0445 + 0.963/(electron->pt))
 	return false;
       if(electron->sieie              >= 0.0353)
 	return false;
