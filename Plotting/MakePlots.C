@@ -19,12 +19,12 @@
 
 void MakePlots() {
 
-  TFile *fVBFEWK = new TFile("VBF_EWK_2016_loose_m.root","READ");
-  TFile *fVBFQCD = new TFile("VBF_QCD_2016_loose_m.root","READ");
-  TFile *fTop    = new TFile("Top_2016_loose_m.root",    "READ");
-  TFile *fWJets  = new TFile("WJets_2016_loose_m.root",  "READ");
-  TFile *fDYJets = new TFile("DYJets_2016_loose_m.root", "READ");
-  TFile *fDataM  = new TFile("DataM_2016_loose_m.root",  "READ");
+  TFile *fVBFEWK = new TFile("VBF_EWK_2016_loose.root","READ");
+  TFile *fVBFQCD = new TFile("VBF_QCD_2016_loose.root","READ");
+  TFile *fTop    = new TFile("Top_2016_loose.root",    "READ");
+  TFile *fWJets  = new TFile("WJets_2016_loose.root",  "READ");
+  TFile *fDYJets = new TFile("DYJets_2016_loose.root", "READ");
+  TFile *fDataM  = new TFile("DataM_2016_loose.root",  "READ");
 
   TCanvas *c1 = new TCanvas("c1","c1",800,800);
   gStyle->SetOptStat(0);
@@ -46,7 +46,7 @@ void MakePlots() {
   gStyle->SetTitleOffset(1.400,"Y");
 
   c1->cd(1)->SetLogy();
-  TLegend *l = new TLegend(0.6,0.65,0.9,0.85);
+  TLegend *l = new TLegend(0.6,0.68,0.9,0.85);
   l->SetBorderSize(0);
 
   TString jj[4] = { "Wjj","WV","Zjj","ZV" };
@@ -108,6 +108,7 @@ void MakePlots() {
       hVBFQCD->Draw("histsame");
       hVBFEWK->Draw("histsame");
       hDataM->Draw("same");
+      c1->RedrawAxis();
       
       l->Clear();
       l->AddEntry(hDataM, "Data","pl");
@@ -121,7 +122,11 @@ void MakePlots() {
 
       hDiff->SetMarkerStyle(8);
       hDiff->SetMarkerSize(1.25);
-      hDiff->GetYaxis()->SetRangeUser(0,3);
+      if (jj[y]=="Zjj" || jj[y]=="ZV") {
+	hDiff->GetYaxis()->SetRangeUser(0.0,3.0);
+      } else {
+	hDiff->GetYaxis()->SetRangeUser(0.5,1.5);
+      }
       hDiff->GetXaxis()->SetTitleOffset(0.9);
       hDiff->GetXaxis()->SetTitleSize(0.15);
       hDiff->GetXaxis()->SetLabelSize(0.15);
@@ -148,7 +153,7 @@ void MakePlots() {
       lup.Draw("same");
       //ldn.Draw("same");
 
-      c1->SaveAs(Form("%s_%s_2016_loose_m.png",ii[x].Data(),jj[y].Data()));
+      c1->SaveAs(Form("%s_%s_2016_loose.png",ii[x].Data(),jj[y].Data()));
     }
   }
   

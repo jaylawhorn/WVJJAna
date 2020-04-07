@@ -128,25 +128,26 @@ void DoDrawing() {
   }
 
 
-  const int nBinsMVBF=5;
-  const int nBinsDETA=6;
-  const int nBinsMVV=8;
-  float MVBF_LE[nBinsMVBF+1] = { 150, 500, 600, 800, 1000, 3000 };
-  //float MVBF_LE[nBinsMVBF+1] = { 600, 800, 1200, 3000 };
-  float DETA_LE[nBinsDETA+1] = { 2.0, 2.5, 3.0, 4.0, 5.0, 6.0, 10.0 };
-  //float DETA_LE[nBinsDETA+1] = { 4.0, 5.0, 6.0, 10.0 };
-  float MVV_LE[nBinsMVV+1] = {150, 300, 450, 600, 1075, 1550, 2025, 2500};
+
+  //float MVBF_LE[nBinsMVBF+1] = { 500, 600, 800, 1000, 3000 };
+  //float DETA_LE[nBinsDETA+1] = { 2.5, 3.0, 4.0, 5.0, 6.0, 10.0 };
   //float MVV_LE[nBinsMVV+1] = {600, 1075, 1550, 2025, 2500};
+  const int nBinsMVBF=3;
+  const int nBinsDETA=5;
+  const int nBinsMVV=3;
+  float MVBF_LE[nBinsMVBF+1] = { 500, 800, 1200, 3000 };
+  float DETA_LE[nBinsDETA+1] = { 2.5, 3.0, 4.0, 5.0, 6.0, 10.0 };
+  float MVV_LE[nBinsMVV+1]   = { 500, 800, 1200, 3000};
   
   Binning bins=makeBinning(nBinsMVBF, nBinsDETA, nBinsMVV, 
 			   MVBF_LE, DETA_LE, MVV_LE);
 
-  Draw2(VBF_EWK,bins,"VBF_EWK_2016_loose_m.root","nom");
-  Draw2(VBF_QCD,bins,"VBF_QCD_2016_loose_m.root","nom");
-  Draw2(Top,bins,"Top_2016_loose_m.root","nom");
-  Draw2(WJets,bins,"WJets_2016_loose_m.root","nom");
-  Draw2(DYJets,bins,"DYJets_2016_loose_m.root","nom");
-  Draw2(DataM,bins,"DataM_2016_loose_m.root","nom");
+  Draw2(VBF_EWK,bins,"VBF_EWK_2016_loose.root","nom");
+  Draw2(VBF_QCD,bins,"VBF_QCD_2016_loose.root","nom");
+  Draw2(Top,bins,"Top_2016_loose.root","nom");
+  Draw2(WJets,bins,"WJets_2016_loose.root","nom");
+  Draw2(DYJets,bins,"DYJets_2016_loose.root","nom");
+  Draw2(DataM,bins,"DataM_2016_loose.root","nom");
   //Draw2(DataE,bins,"DataE_2016_Dec5.root","nom");
 
 
@@ -197,7 +198,7 @@ void Draw2(vector<Sample> samp1, Binning bins, TString outfile, TString var) {
   mVJ_Wjj->GetXaxis()->SetTitle("m(W) had, Wjj");
 
   histName = Form("%s_MET_Wjj",samp1.at(0).sampname.c_str());
-  TH1D* MET_Wjj = new TH1D(histName, histName, 40, 0, 2000);
+  TH1D* MET_Wjj = new TH1D(histName, histName, 40, 0, 1200);
   MET_Wjj->Sumw2();
   MET_Wjj->SetTitle(TString(samp1.at(0).sampname));
   MET_Wjj->GetXaxis()->SetTitle("MET, Wjj");
@@ -247,7 +248,7 @@ void Draw2(vector<Sample> samp1, Binning bins, TString outfile, TString var) {
   mVJ_WV->GetXaxis()->SetTitle("m(W) had, WV");
 
   histName = Form("%s_MET_WV",samp1.at(0).sampname.c_str());
-  TH1D* MET_WV = new TH1D(histName, histName, 40, 0, 2000);
+  TH1D* MET_WV = new TH1D(histName, histName, 40, 0, 1200);
   MET_WV->Sumw2();
   MET_WV->SetTitle(TString(samp1.at(0).sampname));
   MET_WV->GetXaxis()->SetTitle("MET, WV");
@@ -273,13 +274,13 @@ void Draw2(vector<Sample> samp1, Binning bins, TString outfile, TString var) {
   dETA_Zjj->GetXaxis()->SetTitle("dEta, Zjj");
 
   histName = Form("%s_ETA1_Zjj",samp1.at(0).sampname.c_str());
-  TH1D* ETA1_Zjj = new TH1D(histName, histName, 40, -5, 5);
+  TH1D* ETA1_Zjj = new TH1D(histName, histName, 20, -5, 5);
   ETA1_Zjj->Sumw2();
   ETA1_Zjj->SetTitle(TString(samp1.at(0).sampname));
   ETA1_Zjj->GetXaxis()->SetTitle("Eta(j1), Zjj");
 
   histName = Form("%s_ETA2_Zjj",samp1.at(0).sampname.c_str());
-  TH1D* ETA2_Zjj = new TH1D(histName, histName, 40, -5, 5);
+  TH1D* ETA2_Zjj = new TH1D(histName, histName, 20, -5, 5);
   ETA2_Zjj->Sumw2();
   ETA2_Zjj->SetTitle(TString(samp1.at(0).sampname));
   ETA2_Zjj->GetXaxis()->SetTitle("Eta(j2), Zjj");
@@ -291,13 +292,13 @@ void Draw2(vector<Sample> samp1, Binning bins, TString outfile, TString var) {
   mVBF_Zjj->GetXaxis()->SetTitle("m(VBF), Zjj");
 
   histName = Form("%s_mVJ_Zjj",samp1.at(0).sampname.c_str());
-  TH1D* mVJ_Zjj = new TH1D(histName, histName, 24, 30, 150);
+  TH1D* mVJ_Zjj = new TH1D(histName, histName, 12, 30, 150);
   mVJ_Zjj->Sumw2();
   mVJ_Zjj->SetTitle(TString(samp1.at(0).sampname));
   mVJ_Zjj->GetXaxis()->SetTitle("m(Z) had, Zjj");
 
   histName = Form("%s_mVL_Zjj",samp1.at(0).sampname.c_str());
-  TH1D* mVL_Zjj = new TH1D(histName, histName, 24, 30, 150);
+  TH1D* mVL_Zjj = new TH1D(histName, histName, 12, 30, 150);
   mVL_Zjj->Sumw2();
   mVL_Zjj->SetTitle(TString(samp1.at(0).sampname));
   mVL_Zjj->GetXaxis()->SetTitle("m(Z) lep, Zjj");
@@ -317,13 +318,13 @@ void Draw2(vector<Sample> samp1, Binning bins, TString outfile, TString var) {
   dETA_ZV->GetXaxis()->SetTitle("dEta, ZV");
 
   histName = Form("%s_ETA1_ZV",samp1.at(0).sampname.c_str());
-  TH1D* ETA1_ZV = new TH1D(histName, histName, 40, -5, 5);
+  TH1D* ETA1_ZV = new TH1D(histName, histName, 20, -5, 5);
   ETA1_ZV->Sumw2();
   ETA1_ZV->SetTitle(TString(samp1.at(0).sampname));
   ETA1_ZV->GetXaxis()->SetTitle("Eta(j1), ZV");
 
   histName = Form("%s_ETA2_ZV",samp1.at(0).sampname.c_str());
-  TH1D* ETA2_ZV = new TH1D(histName, histName, 40, -5, 5);
+  TH1D* ETA2_ZV = new TH1D(histName, histName, 20, -5, 5);
   ETA2_ZV->Sumw2();
   ETA2_ZV->SetTitle(TString(samp1.at(0).sampname));
   ETA2_ZV->GetXaxis()->SetTitle("Eta(j2), ZV");
@@ -335,13 +336,13 @@ void Draw2(vector<Sample> samp1, Binning bins, TString outfile, TString var) {
   mVBF_ZV->GetXaxis()->SetTitle("m(VBF), ZV");
 
   histName = Form("%s_mVJ_ZV",samp1.at(0).sampname.c_str());
-  TH1D* mVJ_ZV = new TH1D(histName, histName, 24, 30, 150);
+  TH1D* mVJ_ZV = new TH1D(histName, histName, 12, 30, 150);
   mVJ_ZV->Sumw2();
   mVJ_ZV->SetTitle(TString(samp1.at(0).sampname));
   mVJ_ZV->GetXaxis()->SetTitle("m(Z) had, ZV");
 
   histName = Form("%s_mVL_ZV",samp1.at(0).sampname.c_str());
-  TH1D* mVL_ZV = new TH1D(histName, histName, 24, 30, 150);
+  TH1D* mVL_ZV = new TH1D(histName, histName, 12, 30, 150);
   mVL_ZV->Sumw2();
   mVL_ZV->SetTitle(TString(samp1.at(0).sampname));
   mVL_ZV->GetXaxis()->SetTitle("m(Z) lep, ZV");
@@ -455,16 +456,13 @@ void Draw2(vector<Sample> samp1, Binning bins, TString outfile, TString var) {
     //for (int i=0; i<200; i++) {
       intree->GetEntry(i);
 
-      //if ( !(nBtag_loose==0 && vbf1_AK4_pt>50 && vbf2_AK4_pt>50) ) continue;
+      if ( !(nBtag_loose==0 && vbf1_AK4_pt>50 && vbf2_AK4_pt>50) ) continue;
       //if ( !(nBtag_loose>0 && vbf1_AK4_pt>50 && vbf2_AK4_pt>50) ) continue;
-      if ( !(nBtag_loose==0 && vbf1_AK4_pt>30 && vbf2_AK4_pt>30) ) continue;
-      //if ( !(vbf1_AK4_pt>50 && vbf2_AK4_pt>50) ) continue;
-      //if ( vbf_m < 500) continue;
-      if ( vbf_m < 250) continue;
+      if ( vbf_m < 500) continue;
+      if ( fabs(vbf1_AK4_eta - vbf2_AK4_eta)<2.5) continue;
       //if ( fabs(vbf1_AK4_eta - vbf2_AK4_eta)<4.0) continue;
-      if ( fabs(vbf1_AK4_eta - vbf2_AK4_eta)<2.0) continue;
-      //if ( dibos_m < 600) continue;
-      if ( dibos_m < 150) continue;
+      //if ( dibos_m < 150) continue;
+      if ( dibos_m < 500) continue;
 
       bool isEle=false, isResolved=false, isZ=false;
 
@@ -475,6 +473,8 @@ void Draw2(vector<Sample> samp1, Binning bins, TString outfile, TString var) {
 	continue;
       }
 
+      //if (isEle==true) continue;
+
       if (bos_PuppiAK8_m_sd0_corr > 0 && bos_AK4AK4_m < 0) { isResolved=false; }
       else if (bos_PuppiAK8_m_sd0_corr < 0 && bos_AK4AK4_m > 0) { isResolved=true; }
       else {
@@ -484,7 +484,6 @@ void Draw2(vector<Sample> samp1, Binning bins, TString outfile, TString var) {
       if (isResolved==true && (bos_AK4AK4_m<65 ||bos_AK4AK4_m>105)) continue;
       //if (isResolved==true && (bos_AK4AK4_m>65 &&bos_AK4AK4_m<105)) continue;
       if (isResolved==true && (bos_j1_AK4_pt<30 || bos_j2_AK4_pt<30)) continue;
-      if (isResolved==true && bos_AK4AK4_pt>200) continue;
 
       if (isResolved==false && (bos_PuppiAK8_m_sd0_corr<65 ||bos_PuppiAK8_m_sd0_corr>105)) continue;
       //if (isResolved==false && (bos_PuppiAK8_m_sd0_corr>65 &&bos_PuppiAK8_m_sd0_corr<105)) continue;
@@ -494,21 +493,15 @@ void Draw2(vector<Sample> samp1, Binning bins, TString outfile, TString var) {
       if (lep2_pt>0) isZ=true;
 
       if (isEle==true && (lep1_pt<30 || abs(lep1_eta)>2.5 || (abs(lep1_eta)>1.4442 && abs(lep1_eta)<1.566))) continue;
-      //if (isEle==true && (lep1_pt<45 || abs(lep1_eta)>2.5 || (abs(lep1_eta)>1.4442 && abs(lep1_eta)<1.566))) continue;
       if (isEle==false && (lep1_pt<30 || abs(lep1_eta)>2.4)) continue;
-      //if (isEle==false && (lep1_pt<45 || abs(lep1_eta)>2.4)) continue;
-
-      if (isEle==true) continue;
-      //if (isEle==false) continue;
 
       if (isZ==true && isEle==true && (lep2_pt<30 || abs(lep2_eta)>2.5 || (abs(lep2_eta)>1.4442 && abs(lep2_eta)<1.566))) continue;
       if (isZ==true && isEle==false && (lep2_pt<30 || abs(lep2_eta)>2.4)) continue;
 
-      if (isZ==false && isEle==true && MET<80) continue;
-      if (isZ==false && isEle==false && MET<50) continue;
+      if (isZ==false && MET<30) continue;
 
-      float weight=(samp1.at(xx).xsec*samp1.at(xx).xsecCorr*lumi*genWeight*puWeight)/(1.0*(nTotal-2*nNeg));
-      //float weight=(samp1.at(xx).xsec*lumi*genWeight)/(1.0*(nTotal-2*nNeg));
+      //float weight=(samp1.at(xx).xsec*samp1.at(xx).xsecCorr*lumi*genWeight*puWeight)/(1.0*(nTotal-2*nNeg));
+      float weight=(samp1.at(xx).xsec*lumi*genWeight)/(1.0*(nTotal-2*nNeg));
 
       if (samp1.at(xx).sampname=="dataM" || samp1.at(xx).sampname=="dataE") weight=1.0;
 
