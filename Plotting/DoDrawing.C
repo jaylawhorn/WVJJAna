@@ -1,5 +1,6 @@
 #if !defined(__CINT__) || defined(__MAKECINT__)
 #include <TROOT.h> 
+#include <TMath.h> 
 #include <TSystem.h> 
 #include <TFile.h> 
 #include <TTree.h>
@@ -127,28 +128,22 @@ void DoDrawing() {
     }
   }
 
-
-
-  //float MVBF_LE[nBinsMVBF+1] = { 500, 600, 800, 1000, 3000 };
-  //float DETA_LE[nBinsDETA+1] = { 2.5, 3.0, 4.0, 5.0, 6.0, 10.0 };
-  //float MVV_LE[nBinsMVV+1] = {600, 1075, 1550, 2025, 2500};
-  const int nBinsMVBF=3;
+  const int nBinsMVBF=4;
   const int nBinsDETA=5;
-  const int nBinsMVV=3;
-  float MVBF_LE[nBinsMVBF+1] = { 500, 800, 1200, 3000 };
+  const int nBinsMVV=7;
+  float MVBF_LE[nBinsMVBF+1] = { 500, 600, 800, 1000, 3000 };
   float DETA_LE[nBinsDETA+1] = { 2.5, 3.0, 4.0, 5.0, 6.0, 10.0 };
-  float MVV_LE[nBinsMVV+1]   = { 500, 800, 1200, 3000};
+  float MVV_LE[nBinsMVV+1] ={ 150, 300, 450, 600, 1075, 1550, 2025, 2500};
   
   Binning bins=makeBinning(nBinsMVBF, nBinsDETA, nBinsMVV, 
 			   MVBF_LE, DETA_LE, MVV_LE);
 
-  Draw2(VBF_EWK,bins,"VBF_EWK_2016_loose.root","nom");
-  Draw2(VBF_QCD,bins,"VBF_QCD_2016_loose.root","nom");
-  Draw2(Top,bins,"Top_2016_loose.root","nom");
-  Draw2(WJets,bins,"WJets_2016_loose.root","nom");
-  Draw2(DYJets,bins,"DYJets_2016_loose.root","nom");
-  Draw2(DataM,bins,"DataM_2016_loose.root","nom");
-  //Draw2(DataE,bins,"DataE_2016_Dec5.root","nom");
+  Draw2(VBF_EWK,bins,"VBF_EWK_2016_ele.root","nom");
+  Draw2(VBF_QCD,bins,"VBF_QCD_2016_ele.root","nom");
+  Draw2(Top,bins,"Top_2016_ele.root","nom");
+  Draw2(WJets,bins,"WJets_2016_ele.root","nom");
+  Draw2(DYJets,bins,"DYJets_2016_ele.root","nom");
+  Draw2(DataM,bins,"DataM_2016_ele.root","nom");
 
 
 }
@@ -158,6 +153,30 @@ void Draw2(vector<Sample> samp1, Binning bins, TString outfile, TString var) {
   out = new TFile(outfile,"RECREATE");
 
   TString histName;
+
+  histName = Form("%s_ETA_lep_Wjj",samp1.at(0).sampname.c_str());
+  TH1D* ETA_lep_Wjj = new TH1D(histName, histName, 40, -2.5, 2.5);
+  ETA_lep_Wjj->Sumw2();
+  ETA_lep_Wjj->SetTitle(TString(samp1.at(0).sampname));
+  ETA_lep_Wjj->GetXaxis()->SetTitle("Eta(lep), Wjj");
+
+  histName = Form("%s_ETA_bos_Wjj",samp1.at(0).sampname.c_str());
+  TH1D* ETA_bos_Wjj = new TH1D(histName, histName, 40, -10, 10);
+  ETA_bos_Wjj->Sumw2();
+  ETA_bos_Wjj->SetTitle(TString(samp1.at(0).sampname));
+  ETA_bos_Wjj->GetXaxis()->SetTitle("Eta(jj), Wjj");
+
+  histName = Form("%s_ETA_lep_WV",samp1.at(0).sampname.c_str());
+  TH1D* ETA_lep_WV = new TH1D(histName, histName, 40, -2.5, 2.5);
+  ETA_lep_WV->Sumw2();
+  ETA_lep_WV->SetTitle(TString(samp1.at(0).sampname));
+  ETA_lep_WV->GetXaxis()->SetTitle("Eta(lep), WV");
+
+  histName = Form("%s_ETA_bos_WV",samp1.at(0).sampname.c_str());
+  TH1D* ETA_bos_WV = new TH1D(histName, histName, 40, -5, 5);
+  ETA_bos_WV->Sumw2();
+  ETA_bos_WV->SetTitle(TString(samp1.at(0).sampname));
+  ETA_bos_WV->GetXaxis()->SetTitle("Eta(jj), WV");
 
   //Wjj
 
@@ -184,7 +203,7 @@ void Draw2(vector<Sample> samp1, Binning bins, TString outfile, TString var) {
   ETA2_Wjj->Sumw2();
   ETA2_Wjj->SetTitle(TString(samp1.at(0).sampname));
   ETA2_Wjj->GetXaxis()->SetTitle("Eta(j2), Wjj");
-  
+
   histName = Form("%s_mVBF_Wjj",samp1.at(0).sampname.c_str());
   TH1D* mVBF_Wjj = new TH1D(histName, histName, bins.nBinsMVBF, &bins.MVBF_LE[0]);
   mVBF_Wjj->Sumw2();
@@ -347,8 +366,8 @@ void Draw2(vector<Sample> samp1, Binning bins, TString outfile, TString var) {
   mVL_ZV->SetTitle(TString(samp1.at(0).sampname));
   mVL_ZV->GetXaxis()->SetTitle("m(Z) lep, ZV");
 
-  Float_t lumi=35867.06;
-  //Float_t lumi=41530.0;
+  //Float_t lumi=35867.06;
+  Float_t lumi=41530.0;
 
   const float MUON_MASS = 0.1056583745;
   const float ELE_MASS  = 0.000511;
@@ -461,8 +480,7 @@ void Draw2(vector<Sample> samp1, Binning bins, TString outfile, TString var) {
       if ( vbf_m < 500) continue;
       if ( fabs(vbf1_AK4_eta - vbf2_AK4_eta)<2.5) continue;
       //if ( fabs(vbf1_AK4_eta - vbf2_AK4_eta)<4.0) continue;
-      //if ( dibos_m < 150) continue;
-      if ( dibos_m < 500) continue;
+      //if ( dibos_m < 500) continue;
 
       bool isEle=false, isResolved=false, isZ=false;
 
@@ -473,7 +491,7 @@ void Draw2(vector<Sample> samp1, Binning bins, TString outfile, TString var) {
 	continue;
       }
 
-      //if (isEle==true) continue;
+      if (isEle==false) continue;
 
       if (bos_PuppiAK8_m_sd0_corr > 0 && bos_AK4AK4_m < 0) { isResolved=false; }
       else if (bos_PuppiAK8_m_sd0_corr < 0 && bos_AK4AK4_m > 0) { isResolved=true; }
@@ -492,13 +510,13 @@ void Draw2(vector<Sample> samp1, Binning bins, TString outfile, TString var) {
 
       if (lep2_pt>0) isZ=true;
 
-      if (isEle==true && (lep1_pt<30 || abs(lep1_eta)>2.5 || (abs(lep1_eta)>1.4442 && abs(lep1_eta)<1.566))) continue;
-      if (isEle==false && (lep1_pt<30 || abs(lep1_eta)>2.4)) continue;
+      if (isEle==true && (lep1_pt<40 || abs(lep1_eta)>2.5 || (abs(lep1_eta)>1.4442 && abs(lep1_eta)<1.566))) continue;
+      if (isEle==false && (lep1_pt<35 || abs(lep1_eta)>2.4)) continue;
 
       if (isZ==true && isEle==true && (lep2_pt<30 || abs(lep2_eta)>2.5 || (abs(lep2_eta)>1.4442 && abs(lep2_eta)<1.566))) continue;
       if (isZ==true && isEle==false && (lep2_pt<30 || abs(lep2_eta)>2.4)) continue;
 
-      if (isZ==false && MET<30) continue;
+      if (isZ==false && MET<50) continue;
 
       //float weight=(samp1.at(xx).xsec*samp1.at(xx).xsecCorr*lumi*genWeight*puWeight)/(1.0*(nTotal-2*nNeg));
       float weight=(samp1.at(xx).xsec*lumi*genWeight)/(1.0*(nTotal-2*nNeg));
@@ -508,6 +526,10 @@ void Draw2(vector<Sample> samp1, Binning bins, TString outfile, TString var) {
       //cout << weight << endl;
 
       if (isResolved==true && isZ==false) {
+
+	//ETA_bos_Wjj->Fill(2*TMath::ATan(TMath::Exp(-1*bos_AK4AK4_eta)),weight);
+	ETA_bos_Wjj->Fill(bos_AK4AK4_eta,weight);
+	ETA_lep_Wjj->Fill(lep1_eta,weight);
 
 	mVV_Wjj->Fill(dibos_m, weight);
 	dETA_Wjj->Fill(abs(vbf1_AK4_eta - vbf2_AK4_eta), weight);
@@ -521,6 +543,9 @@ void Draw2(vector<Sample> samp1, Binning bins, TString outfile, TString var) {
       else if (isResolved==false && isZ==false) {
 
 	//cout << weight << ", " << vbf_m << endl;
+
+	ETA_bos_WV->Fill(bos_PuppiAK8_eta,weight);
+	ETA_lep_WV->Fill(lep1_eta,weight);
 
 	mVV_WV->Fill(dibos_m, weight);
 	dETA_WV->Fill(abs(vbf1_AK4_eta - vbf2_AK4_eta), weight);
