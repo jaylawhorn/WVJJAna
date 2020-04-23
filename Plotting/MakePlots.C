@@ -19,12 +19,12 @@
 
 void MakePlots() {
 
-  TFile *fVBFEWK = new TFile("VBF_EWK_2016_muon.root","READ");
-  TFile *fVBFQCD = new TFile("VBF_QCD_2016_muon.root","READ");
-  TFile *fTop    = new TFile("Top_2016_muon.root",    "READ");
-  TFile *fWJets  = new TFile("WJets_2016_muon.root",  "READ");
-  TFile *fDYJets = new TFile("DYJets_2016_muon.root", "READ");
-  TFile *fDataM  = new TFile("DataM_2016_muon.root",  "READ");
+  TFile *fVBFEWK = new TFile("VBF_EWK_2016_wjets_el.root","READ");
+  TFile *fVBFQCD = new TFile("VBF_QCD_2016_wjets_el.root","READ");
+  TFile *fTop    = new TFile("Top_2016_wjets_el.root",    "READ");
+  TFile *fWJets  = new TFile("WJets_2016_wjets_el.root",  "READ");
+  TFile *fDYJets = new TFile("DYJets_2016_wjets_el.root", "READ");
+  TFile *fDataM  = new TFile("DataM_2016_wjets_el.root",  "READ");
 
   TCanvas *c1 = new TCanvas("c1","c1",800,800);
   gStyle->SetOptStat(0);
@@ -50,15 +50,16 @@ void MakePlots() {
   l->SetBorderSize(0);
 
   TString jj[4] = { "Wjj","WV","Zjj","ZV" };
-  TString ii[11] = { "mVV","dETA","mVBF","mVJ","MET","ptL","mVL","ETA1","ETA2","ETA_lep","ETA_bos"};
+  TString ii[12] = { "mVV","dETA","mVBF","mVJ","MET","ptL","mVL","ETA1","ETA2","ETA_lep","ETA_bos","nJet50"};
 
   for (int y=0; y<4; y++) {
-    for (int x=0; x<11; x++) {
+    for (int x=0; x<12; x++) {
 
       //if (x==0) continue;
-      if (y>1 && (x==4 || x==5)) continue; 
+      if (y>1 && x==4) continue; 
+      if (y>1 && x==5) continue; 
       if (y<2 && x==6) continue;
-      if (y>1 && x>8) continue;
+      if (y>1 && x>9) continue;
 
       TH1D *hVBFEWK = (TH1D*) fVBFEWK->Get(Form("VBF_EWK_%s_%s",ii[x].Data(),jj[y].Data()));
       TH1D *hVBFQCD = (TH1D*) fVBFQCD->Get(Form("VBF_QCD_%s_%s",ii[x].Data(),jj[y].Data()));
@@ -87,10 +88,24 @@ void MakePlots() {
       hDataM->SetMarkerStyle(20);
       hDataM->SetMarkerSize(1.2);
 
+      if (x==0) {
+	std::cout << "V+jets: " << hWJets->Integral()+hDYJets->Integral() << std::endl;
+	std::cout << "Top:    " << hTop->Integral() << std::endl;
+	std::cout << "QCD-VV: " << hVBFQCD->Integral() << std::endl;
+	std::cout << "VBS:    " << hVBFEWK->Integral() << std::endl;
+      }
+
       //hVBFQCD->Add(hVBFEWK);      
       hDYJets->Add(hVBFQCD);
       hWJets->Add(hDYJets);
       hTop->Add(hWJets);
+
+      if (x==0) {
+	std::cout << "*************" << std::endl;
+	std::cout << "Data:   " << hDataM->Integral() << std::endl;
+	std::cout << "Back:   " << hTop->Integral() << std::endl;
+	std::cout << "Signal: " << hVBFEWK->Integral() << std::endl;
+      }
 
       hVBFEWK->Scale(10.0);
       
@@ -154,8 +169,7 @@ void MakePlots() {
       lup.Draw("same");
       //ldn.Draw("same");
 
-      //c1->SaveAs(Form("april8/2016/wjets/%s_%s_2016_wjets.png",ii[x].Data(),jj[y].Data()));
-      c1->SaveAs(Form("%s_%s_2016_muon.png",ii[x].Data(),jj[y].Data()));
+      c1->SaveAs(Form("%s_%s_2016_wjets_el.png",ii[x].Data(),jj[y].Data()));
     }
   }
   
