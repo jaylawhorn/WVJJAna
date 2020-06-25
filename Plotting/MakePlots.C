@@ -19,12 +19,12 @@
 
 void MakePlots() {
 
-  TFile *fVBFEWK = new TFile("VBF_EWK_2016_wjets_el.root","READ");
-  TFile *fVBFQCD = new TFile("VBF_QCD_2016_wjets_el.root","READ");
-  TFile *fTop    = new TFile("Top_2016_wjets_el.root",    "READ");
-  TFile *fWJets  = new TFile("WJets_2016_wjets_el.root",  "READ");
-  TFile *fDYJets = new TFile("DYJets_2016_wjets_el.root", "READ");
-  TFile *fDataM  = new TFile("DataM_2016_wjets_el.root",  "READ");
+  TFile *fVBFEWK = new TFile("VBF_EWK_2018_vjets_mu.root","READ");
+  TFile *fVBFQCD = new TFile("VBF_QCD_2018_vjets_mu.root","READ");
+  TFile *fTop    =     new TFile("Top_2018_vjets_mu.root","READ");
+  TFile *fWJets  =   new TFile("WJets_2018_vjets_mu.root","READ");
+  TFile *fDYJets =  new TFile("DYJets_2018_vjets_mu.root","READ");
+  TFile *fDataM  =   new TFile("DataM_2018_vjets_mu.root","READ");
 
   TCanvas *c1 = new TCanvas("c1","c1",800,800);
   gStyle->SetOptStat(0);
@@ -141,7 +141,7 @@ void MakePlots() {
       if (jj[y]=="Zjj" || jj[y]=="ZV") {
 	hDiff->GetYaxis()->SetRangeUser(0.0,3.0);
       } else {
-	hDiff->GetYaxis()->SetRangeUser(0.5,1.5);
+	hDiff->GetYaxis()->SetRangeUser(0.0,3.0);
       }
       hDiff->GetXaxis()->SetTitleOffset(0.9);
       hDiff->GetXaxis()->SetTitleSize(0.15);
@@ -169,7 +169,7 @@ void MakePlots() {
       lup.Draw("same");
       //ldn.Draw("same");
 
-      c1->SaveAs(Form("%s_%s_2016_wjets_el.png",ii[x].Data(),jj[y].Data()));
+      c1->SaveAs(Form("%s_%s_2018_vjets_mu_LO_NJET.png",ii[x].Data(),jj[y].Data()));
     }
   }
   

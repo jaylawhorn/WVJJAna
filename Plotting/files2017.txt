@@ -1,47 +1,50 @@
 #***********************************************************
 # name  file_location  xspb/lumipb  otherscale
 #***********************************************************
-dataM	/eos/cms/store/user/jlawhorn/WVJJTree_May15/2017/Data_noDup.root 41530.0 1
+dataM	/eos/cms/store/user/jlawhorn/WVJJTree_Jun20/2017/Data_noDup.root 41530.0 1
 #***********************************************************
-VBF_EWK	/eos/cms/store/user/jlawhorn/WVJJTree_May15/2017/WminusTo2JZTo2LJJ_EWK_LO_SM_MJJ100PTJ10_TuneCP5_13TeV-madgraph-pythia8.root       0.02982 1
-VBF_EWK	/eos/cms/store/user/jlawhorn/WVJJTree_May15/2017/WminusToLNuWminusTo2JJJ_EWK_LO_SM_MJJ100PTJ10_TuneCP5_13TeV-madgraph-pythia8.root 0.03259 1
-VBF_EWK	/eos/cms/store/user/jlawhorn/WVJJTree_May15/2017/WminusToLNuZTo2JJJ_EWK_LO_SM_MJJ100PTJ10_TuneCP5_13TeV-madgraph-pythia8.root      0.1     1
-VBF_EWK	/eos/cms/store/user/jlawhorn/WVJJTree_May15/2017/WplusTo2JWminusToLNuJJ_EWK_LO_SM_MJJ100PTJ10_TuneCP5_13TeV-madgraph-pythia8.root  0.9107  1
-VBF_EWK	/eos/cms/store/user/jlawhorn/WVJJTree_May15/2017/WplusTo2JZTo2LJJ_EWK_LO_SM_MJJ100PTJ10_TuneCP5_13TeV-madgraph-pythia8.root	   0.05401 1
-VBF_EWK	/eos/cms/store/user/jlawhorn/WVJJTree_May15/2017/WplusToLNuWminusTo2JJJ_EWK_LO_SM_MJJ100PTJ10_TuneCP5_13TeV-madgraph-pythia8.root  0.9114  1
-VBF_EWK	/eos/cms/store/user/jlawhorn/WVJJTree_May15/2017/WplusToLNuWplusTo2JJJ_EWK_LO_SM_MJJ100PTJ10_TuneCP5_13TeV-madgraph-pythia8.root   0.08793 1
-VBF_EWK	/eos/cms/store/user/jlawhorn/WVJJTree_May15/2017/WplusToLNuZTo2JJJ_EWK_LO_SM_MJJ100PTJ10_TuneCP5_13TeV-madgraph-pythia8.root	   0.1825  1
-VBF_EWK	/eos/cms/store/user/jlawhorn/WVJJTree_May15/2017/ZTo2LZTo2JJJ_EWK_LO_SM_MJJ100PTJ10_TuneCP5_13TeV-madgraph-pythia8.root	      	   0.01589 1
+VBF_EWK	/eos/cms/store/user/jlawhorn/WVJJTree_Jun20/2017/WminusTo2JZTo2LJJ_EWK_LO_SM_MJJ100PTJ10_TuneCP5_13TeV-madgraph-pythia8.root       0.02982 1
+VBF_EWK	/eos/cms/store/user/jlawhorn/WVJJTree_Jun20/2017/WminusToLNuWminusTo2JJJ_EWK_LO_SM_MJJ100PTJ10_TuneCP5_13TeV-madgraph-pythia8.root 0.03259 1
+VBF_EWK	/eos/cms/store/user/jlawhorn/WVJJTree_Jun20/2017/WminusToLNuZTo2JJJ_EWK_LO_SM_MJJ100PTJ10_TuneCP5_13TeV-madgraph-pythia8.root      0.1     1
+VBF_EWK	/eos/cms/store/user/jlawhorn/WVJJTree_Jun20/2017/WplusTo2JWminusToLNuJJ_EWK_LO_SM_MJJ100PTJ10_TuneCP5_13TeV-madgraph-pythia8.root  0.9107  1
+VBF_EWK	/eos/cms/store/user/jlawhorn/WVJJTree_Jun20/2017/WplusTo2JZTo2LJJ_EWK_LO_SM_MJJ100PTJ10_TuneCP5_13TeV-madgraph-pythia8.root	   0.05401 1
+VBF_EWK	/eos/cms/store/user/jlawhorn/WVJJTree_Jun20/2017/WplusToLNuWminusTo2JJJ_EWK_LO_SM_MJJ100PTJ10_TuneCP5_13TeV-madgraph-pythia8.root  0.9114  1
+VBF_EWK	/eos/cms/store/user/jlawhorn/WVJJTree_Jun20/2017/WplusToLNuWplusTo2JJJ_EWK_LO_SM_MJJ100PTJ10_TuneCP5_13TeV-madgraph-pythia8.root   0.08793 1
+VBF_EWK	/eos/cms/store/user/jlawhorn/WVJJTree_Jun20/2017/WplusToLNuZTo2JJJ_EWK_LO_SM_MJJ100PTJ10_TuneCP5_13TeV-madgraph-pythia8.root	   0.1825  1
 #***********************************************************
-VBF_QCD	/eos/cms/store/user/jlawhorn/WVJJTree_May15/2017/WminusTo2JZTo2LJJ_QCD_LO_SM_MJJ100PTJ10_TuneCP5_13TeV-madgraph-pythia8.root       0.3488   1
-VBF_QCD	/eos/cms/store/user/jlawhorn/WVJJTree_May15/2017/WminusToLNuWminusTo2JJJ_QCD_LO_SM_MJJ100PTJ10_TuneCP5_13TeV-madgraph-pythia8.root 0.03203  1
-VBF_QCD	/eos/cms/store/user/jlawhorn/WVJJTree_May15/2017/WminusToLNuZTo2JJJ_QCD_LO_SM_MJJ100PTJ10_TuneCP5_13TeV-madgraph-pythia8.root      1.166    1
-VBF_QCD	/eos/cms/store/user/jlawhorn/WVJJTree_May15/2017/WplusTo2JWminusToLNuJJ_QCD_LO_SM_MJJ100PTJ10_TuneCP5_13TeV-madgraph-pythia8.root  5.568    1
-VBF_QCD	/eos/cms/store/user/jlawhorn/WVJJTree_May15/2017/WplusTo2JZTo2LJJ_QCD_LO_SM_MJJ100PTJ10_TuneCP5_13TeV-madgraph-pythia8.root	   0.575    1
-VBF_QCD	/eos/cms/store/user/jlawhorn/WVJJTree_May15/2017/WplusToLNuWminusTo2JJJ_QCD_LO_SM_MJJ100PTJ10_TuneCP5_13TeV-madgraph-pythia8.root  5.546    1
-VBF_QCD	/eos/cms/store/user/jlawhorn/WVJJTree_May15/2017/WplusToLNuWplusTo2JJJ_QCD_LO_SM_MJJ100PTJ10_TuneCP5_13TeV-madgraph-pythia8.root   0.07584  1
-VBF_QCD	/eos/cms/store/user/jlawhorn/WVJJTree_May15/2017/WplusToLNuZTo2JJJ_QCD_LO_SM_MJJ100PTJ10_TuneCP5_13TeV-madgraph-pythia8.root	   1.938    1
-VBF_QCD	/eos/cms/store/user/jlawhorn/WVJJTree_May15/2017/ZTo2LZTo2JJJ_QCD_LO_SM_MJJ100PTJ10_TuneCP5_13TeV-madgraph-pythia8.root	      	   0.3449   1
+VBF_QCD	/eos/cms/store/user/jlawhorn/WVJJTree_Jun20/2017/WminusTo2JZTo2LJJ_QCD_LO_SM_MJJ100PTJ10_TuneCP5_13TeV-madgraph-pythia8.root       0.3488   1
+VBF_QCD	/eos/cms/store/user/jlawhorn/WVJJTree_Jun20/2017/WminusToLNuWminusTo2JJJ_QCD_LO_SM_MJJ100PTJ10_TuneCP5_13TeV-madgraph-pythia8.root 0.03203  1
+VBF_QCD	/eos/cms/store/user/jlawhorn/WVJJTree_Jun20/2017/WminusToLNuZTo2JJJ_QCD_LO_SM_MJJ100PTJ10_TuneCP5_13TeV-madgraph-pythia8.root      1.166    1
+VBF_QCD	/eos/cms/store/user/jlawhorn/WVJJTree_Jun20/2017/WplusTo2JWminusToLNuJJ_QCD_LO_SM_MJJ100PTJ10_TuneCP5_13TeV.root  5.568    1
+VBF_QCD	/eos/cms/store/user/jlawhorn/WVJJTree_Jun20/2017/WplusTo2JZTo2LJJ_QCD_LO_SM_MJJ100PTJ10_TuneCP5_13TeV-madgraph-pythia8.root	   0.575    1
+VBF_QCD	/eos/cms/store/user/jlawhorn/WVJJTree_Jun20/2017/WplusToLNuWminusTo2JJJ_QCD_LO_SM_MJJ100PTJ10_TuneCP5_13TeV.root  5.546    1
+VBF_QCD	/eos/cms/store/user/jlawhorn/WVJJTree_Jun20/2017/WplusToLNuWplusTo2JJJ_QCD_LO_SM_MJJ100PTJ10_TuneCP5_13TeV-madgraph-pythia8.root   0.07584  1
+VBF_QCD	/eos/cms/store/user/jlawhorn/WVJJTree_Jun20/2017/WplusToLNuZTo2JJJ_QCD_LO_SM_MJJ100PTJ10_TuneCP5_13TeV-madgraph-pythia8.root	   1.938    1
 #***********************************************************
-DYJets  /eos/cms/store/user/jlawhorn/WVJJTree_May15/2017/DY1JetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8.root 876.9 1
-DYJets  /eos/cms/store/user/jlawhorn/WVJJTree_May15/2017/DY2JetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8.root 306.4 1 
-DYJets  /eos/cms/store/user/jlawhorn/WVJJTree_May15/2017/DY3JetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8.root 112.0 1
-DYJets  /eos/cms/store/user/jlawhorn/WVJJTree_May15/2017/DY4JetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8.root  44.03 1 
-#DYJets 	/eos/cms/store/user/jlawhorn/WVJJTree_May15/2017/DYJetsToLL_0J_TuneCP5_13TeV-amcatnloFXFX-pythia8.root 	 4758.516  1 
-#DYJets 	/eos/cms/store/user/jlawhorn/WVJJTree_May15/2017/DYJetsToLL_1J_TuneCP5_13TeV-amcatnloFXFX-pythia8.root 	  885.216  1 
-#DYJets 	/eos/cms/store/user/jlawhorn/WVJJTree_May15/2017/DYJetsToLL_2J_TuneCP5_13TeV-amcatnloFXFX-pythia8.root 	  348.361  1 
+DYJets  /eos/cms/store/user/jlawhorn/WVJJTree_Jun20/2017/DY1JetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8.root 876.9 1
+DYJets  /eos/cms/store/user/jlawhorn/WVJJTree_Jun20/2017/DY2JetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8.root 306.4 1 
+DYJets  /eos/cms/store/user/jlawhorn/WVJJTree_Jun20/2017/DY3JetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8.root 112.0 1
+DYJets  /eos/cms/store/user/jlawhorn/WVJJTree_Jun20/2017/DY4JetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8.root  44.03 1 
 #***********************************************************
-Top	/eos/cms/store/user/jlawhorn/WVJJTree_May15/2017/TTToSemiLeptonic_TuneCP5_13TeV-powheg-pythia8.root	365.34 1
-#Top /eos/cms/store/user/jlawhorn/WVJJTree_May15/2017/TTTo2L2Nu_TuneCP5_13TeV_powheg_pythia8.root         86.99   1
+Top /eos/cms/store/user/jlawhorn/WVJJTree_Jun20/2017/TTToSemiLeptonic_TuneCP5_13TeV-powheg-pythia8.root 365.34 1
+Top /eos/cms/store/user/jlawhorn/WVJJTree_Jun20/2017/TTTo2L2Nu_TuneCP5_13TeV-powheg-pythia8.root         86.99   1
+Top /eos/cms/store/user/jlawhorn/WVJJTree_Jun20/2017/TTToHadronic_TuneCP5_13TeV-powheg-pythia8.root     377.96 1
+Top /eos/cms/store/user/jlawhorn/WVJJTree_Jun20/2017/ST_s-channel_antitop_leptonDecays_13TeV-PSweights_powheg-pythia.root 1.33  1
+Top /eos/cms/store/user/jlawhorn/WVJJTree_Jun20/2017/ST_s-channel_top_leptonDecays_13TeV-PSweights_powheg-pythia.root	2.13 1 
+Top /eos/cms/store/user/jlawhorn/WVJJTree_Jun20/2017/ST_t-channel_antitop_5f_TuneCP5_PSweights_13TeV-powheg-pythia8.root  27.19 1
+Top /eos/cms/store/user/jlawhorn/WVJJTree_Jun20/2017/ST_t-channel_top_5f_TuneCP5_13TeV-powheg-pythia8.root	45.70 1
+Top /eos/cms/store/user/jlawhorn/WVJJTree_Jun20/2017/ST_tW_antitop_5f_inclusiveDecays_TuneCP5_13TeV-powheg-pythia8.root	12.04 1  
+Top /eos/cms/store/user/jlawhorn/WVJJTree_Jun20/2017/ST_tW_top_5f_inclusiveDecays_TuneCP5_13TeV-powheg-pythia8.root 12.04 1
+#twiki.cern.ch/twiki/bin/view/LHCPhysics/SingleTopRefXsec
 #***********************************************************
-#WJets /eos/cms/store/user/jlawhorn/WVJJTree_May15/2017/WJetsToLNu_HT-70To100_TuneCP5_13TeV-madgraphMLM-pythia8.root    1292.0  1
-#WJets /eos/cms/store/user/jlawhorn/WVJJTree_May15/2017/WJetsToLNu_HT-100To200_TuneCP5_13TeV-madgraphMLM-pythia8.root   1395.0  1
-#WJets /eos/cms/store/user/jlawhorn/WVJJTree_May15/2017/WJetsToLNu_HT-200To400_TuneCP5_13TeV-madgraphMLM-pythia8.root   407.9   1
-#WJets /eos/cms/store/user/jlawhorn/WVJJTree_May15/2017/WJetsToLNu_HT-400To600_TuneCP5_13TeV-madgraphMLM-pythia8.root   57.48   1
-#WJets /eos/cms/store/user/jlawhorn/WVJJTree_May15/2017/WJetsToLNu_HT-600To800_TuneCP5_13TeV-madgraphMLM-pythia8.root   12.87   1
-#WJets /eos/cms/store/user/jlawhorn/WVJJTree_May15/2017/WJetsToLNu_HT-800To1200_TuneCP5_13TeV-madgraphMLM-pythia8.root  5.366   1
-#WJets /eos/cms/store/user/jlawhorn/WVJJTree_May15/2017/WJetsToLNu_HT-1200To2500_TuneCP5_13TeV-madgraphMLM-pythia8.root 1.074   1
-#WJets /eos/cms/store/user/jlawhorn/WVJJTree_May15/2017/WJetsToLNu_HT-2500ToInf_TuneCP5_13TeV-madgraphMLM-pythia8.root  0.008   1
-WJets  /eos/cms/store/user/jlawhorn/WVJJTree_May15/2017/WJetsToLNu_0J_TuneCP5_13TeV-amcatnloFXFX-pythia8.root  49253.32   1
-WJets  /eos/cms/store/user/jlawhorn/WVJJTree_May15/2017/WJetsToLNu_1J_TuneCP5_13TeV-amcatnloFXFX-pythia8.root   8276.90   1
-WJets  /eos/cms/store/user/jlawhorn/WVJJTree_May15/2017/WJetsToLNu_2J_TuneCP5_13TeV-amcatnloFXFX-pythia8.root   2755.843  1
+#WJets /eos/cms/store/user/jlawhorn/WVJJTree_Jun20/2017/WJetsToLNu_HT-70To100_TuneCP5_13TeV-madgraphMLM-pythia8.root    1292.0  1
+WJets /eos/cms/store/user/jlawhorn/WVJJTree_Jun20/2017/WJetsToLNu_HT-100To200_TuneCP5_13TeV-madgraphMLM-pythia8.root   1395.0  1
+WJets /eos/cms/store/user/jlawhorn/WVJJTree_Jun20/2017/WJetsToLNu_HT-200To400_TuneCP5_13TeV-madgraphMLM-pythia8.root   407.9   1
+WJets /eos/cms/store/user/jlawhorn/WVJJTree_Jun20/2017/WJetsToLNu_HT-400To600_TuneCP5_13TeV-madgraphMLM-pythia8.root   57.48   1
+WJets /eos/cms/store/user/jlawhorn/WVJJTree_Jun20/2017/WJetsToLNu_HT-600To800_TuneCP5_13TeV-madgraphMLM-pythia8.root   12.87   1
+WJets /eos/cms/store/user/jlawhorn/WVJJTree_Jun20/2017/WJetsToLNu_HT-800To1200_TuneCP5_13TeV-madgraphMLM-pythia8.root  5.366   1
+WJets /eos/cms/store/user/jlawhorn/WVJJTree_Jun20/2017/WJetsToLNu_HT-1200To2500_TuneCP5_13TeV-madgraphMLM-pythia8.root 1.074   1
+WJets /eos/cms/store/user/jlawhorn/WVJJTree_Jun20/2017/WJetsToLNu_HT-2500ToInf_TuneCP5_13TeV-madgraphMLM-pythia8.root  0.008   1
+#WJets  /eos/cms/store/user/jlawhorn/WVJJTree_Jun20/2017/WJetsToLNu_0J_TuneCP5_13TeV-amcatnloFXFX-pythia8.root  49253.32   1
+#WJets  /eos/cms/store/user/jlawhorn/WVJJTree_Jun20/2017/WJetsToLNu_1J_TuneCP5_13TeV-amcatnloFXFX-pythia8.root   8276.90   1
+#WJets  /eos/cms/store/user/jlawhorn/WVJJTree_Jun20/2017/WJetsToLNu_2J_TuneCP5_13TeV-amcatnloFXFX-pythia8.root   2755.843  1
